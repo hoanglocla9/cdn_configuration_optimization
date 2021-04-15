@@ -5,3 +5,4 @@ find . -name \*.pkl -delete
 
 rm -rf `find -type d -name .ipynb_checkpoints`
 rm -rf data/*
+rm -f tmp/*
