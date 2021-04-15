@@ -96,7 +96,7 @@ class DataExport:
 
         d1['Hypervolume_indicator'] = np.full(self.batch_size, hv_value)
         d3['ParetoFamily'] = np.zeros(approx_front_samples)
-
+        
         df1 = pd.DataFrame(data=d1)
         df2 = pd.DataFrame(data=d2)
         df3 = pd.DataFrame(data=d3)

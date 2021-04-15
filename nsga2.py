@@ -172,6 +172,8 @@ def main():
 
     # update data exporter
     for X_next, Y_next in zip(X_history, Y_history):
+        print(X_next.shape)
+        print(Y_next.shape)
         exporter.update(X_next, Y_next)
 
     # export all result to csv
