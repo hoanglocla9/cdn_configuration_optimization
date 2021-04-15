@@ -1,7 +1,7 @@
 {
     "NetworkId": "sbd_custom",
     "RequestModels": {
-        "gamma": {"K": 0.475, "Theta": 170.6067, "contentNums": 1000, "alpha": 1.0}
+        "gamma": {"K": 0.475, "Theta": 170.6067, "contentNums": 500, "alpha": 1.0}
     },
     "RoutingMode": "no-color",
     "isLoadRTable": false,
@@ -10,24 +10,25 @@
     "samplingMethod": null,
     "FileSize": 1024,
     "colorNums": 4,
-    "RunReqNums": 1000,
-    "WarmUpReqNums": 1000,
+    "RunReqNums": 500,
+    "WarmUpReqNums": 500,
     "cpuScheduler": "cfs",
     "outputDir": "output/",
     "Routers": [
         { "ID": "mainServer", "IP": "192.168.0.1/24", "dimage": "laloc2496/cdn_origin:latest"},
-        { "ID": "router_1", "IP": "192.168.1.1/26", "maxSize": 2204857600, "type": "LRU", "capacityRatio": 0.9},
-        { "ID": "router_2", "IP": "192.168.2.1/26", "maxSize": 2204857600, "type": "LRU", "capacityRatio": 0.9},
-        { "ID": "router_3", "IP": "192.168.3.1/26", "maxSize": 2204857600, "type": "LRU", "capacityRatio": 0.9},
-        { "ID": "router_4", "IP": "192.168.4.1/26", "maxSize": 2204857600, "type": "LRU", "capacityRatio": 0.9},
-        { "ID": "router_5", "IP": "192.168.5.1/26", "maxSize": 2204857600, "type": "LRU", "capacityRatio": 0.9},
-        { "ID": "router_6", "IP": "192.168.6.1/26", "maxSize": 2204857600, "type": "LRU", "capacityRatio": 0.9},
-        { "ID": "router_7", "IP": "192.168.7.1/26", "maxSize": 2204857600, "type": "LRU", "capacityRatio": 0.9},
-        { "ID": "router_8", "IP": "192.168.8.1/26", "maxSize": 2204857600, "type": "LRU", "capacityRatio": 0.9},
-        { "ID": "router_9", "IP": "192.168.9.1/26", "maxSize": 2204857600, "type": "LRU", "capacityRatio": 0.9},
-        { "ID": "router_10", "IP": "192.168.10.1/26", "maxSize": 2204857600, "type": "LRU", "capacityRatio": 0.9},
-        { "ID": "router_11", "IP": "192.168.11.1/26", "maxSize": 2204857600, "type": "LRU", "capacityRatio": 0.9},
-        { "ID": "router_12", "IP": "192.168.12.1/26", "maxSize": 2204857600, "type": "LRU", "capacityRatio": 0.9}
+        { "ID": "router_1", "IP": "192.168.1.1/26", "maxSize": 102400, "type": "LRU", "capacityRatio": 0.9},
+        { "ID": "router_2", "IP": "192.168.2.1/26", "maxSize": 102400, "type": "LRU", "capacityRatio": 0.9},
+        { "ID": "router_3", "IP": "192.168.3.1/26", "maxSize": 102400, "type": "LRU", "capacityRatio": 0.9},
+        { "ID": "router_4", "IP": "192.168.4.1/26", "maxSize": 102400, "type": "LRU", "capacityRatio": 0.9},
+        { "ID": "router_5", "IP": "192.168.5.1/26", "maxSize": 102400, "type": "LRU", "capacityRatio": 0.9},
+        { "ID": "router_6", "IP": "192.168.6.1/26", "maxSize": 102400, "type": "LRU", "capacityRatio": 0.9},
+        { "ID": "router_7", "IP": "192.168.7.1/26", "maxSize": 102400, "type": "LRU", "capacityRatio": 0.9},
+        { "ID": "router_8", "IP": "192.168.8.1/26", "maxSize": 102400, "type": "LRU", "capacityRatio": 0.9},
+        { "ID": "router_9", "IP": "192.168.9.1/26", "maxSize": 102400, "type": "LRU", "capacityRatio": 0.9},
+        { "ID": "router_10", "IP": "192.168.10.1/26", "maxSize": 102400, "type": "LRU", "capacityRatio": 0.9},
+        { "ID": "router_11", "IP": "192.168.11.1/26", "maxSize": 102400, "type": "LRU", "capacityRatio": 0.9},
+        { "ID": "router_12", "IP": "192.168.12.1/26", "maxSize": 102400, "type": "LRU", "capacityRatio": 0.9},                 
+        { "ID": "router_13", "IP": "192.168.13.1/26", "maxSize": 102400, "type": "LRU", "capacityRatio": 0.9}
     ],
     "Clients": [
         { "ID": "client_1", "IP": "192.168.1.2/26", "gateway": "192.168.1.1", "isTemp": false},
@@ -41,7 +42,8 @@
         { "ID": "client_9", "IP": "192.168.9.2/26", "gateway": "192.168.9.1", "isTemp": false},
         { "ID": "client_10", "IP": "192.168.10.2/26", "gateway": "192.168.10.1", "isTemp": false},
         { "ID": "client_11", "IP": "192.168.11.2/26", "gateway": "192.168.11.1", "isTemp": false},
-        { "ID": "client_12", "IP": "192.168.12.2/26", "gateway": "192.168.12.1", "isTemp": false}
+        { "ID": "client_12", "IP": "192.168.12.2/26", "gateway": "192.168.12.1", "isTemp": false},
+        { "ID": "client_13", "IP": "192.168.13.2/26", "gateway": "192.168.13.1", "isTemp": false}
     ],
     "Links": [
         { "NodeIds": ["router_1/1", "client_1"], "params1": {"bw": 750, "delay": "0us", "ip": "192.168.1.1/26"}},
@@ -56,7 +58,8 @@
         { "NodeIds": ["router_10/1", "client_10"], "params1": {"bw": 750, "delay": "0us", "ip": "192.168.10.1/26"}},
         { "NodeIds": ["router_11/1", "client_11"], "params1": {"bw": 750, "delay": "0us", "ip": "192.168.11.1/26"}},
         { "NodeIds": ["router_12/1", "client_12"], "params1": {"bw": 750, "delay": "0us", "ip": "192.168.12.1/26"}},
-        
+        { "NodeIds": ["router_13/1", "client_13"], "params1": {"bw": 750, "delay": "0us", "ip": "192.168.13.1/26"}},
+
         { "NodeIds": ["router_1/2", "router_2/2"], "params1": {"bw": 1000, "delay": "0us", "ip": "10.1.2.1/24"}, "params2": {"ip": "10.1.2.2/24"}},
         { "NodeIds": ["router_2/3", "router_3/2"], "params1": {"bw": 1000, "delay": "0us", "ip": "10.2.3.1/24"}, "params2": {"ip": "10.2.3.2/24"}},
         { "NodeIds": ["router_3/3", "router_4/2"], "params1": {"bw": 1000, "delay": "0us", "ip": "10.3.4.1/24"}, "params2": {"ip": "10.3.4.2/24"}},

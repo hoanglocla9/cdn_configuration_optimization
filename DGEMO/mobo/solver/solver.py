@@ -25,18 +25,19 @@ class Solver:
         self.algo_kwargs = kwargs
         self.solution = None
 
-    def solve(self, problem, X, Y):
+    def solve(self, problem, X, Y, useInteger):
         '''
         Solve the multi-objective problem
         '''
         # initialize population
         sampling = self._get_sampling(X, Y)
         # setup algorithm
-#         if useInteger:
-#             algo = self.algo_type(sampling=sampling,
-#                      crossover=get_crossover("int_sbx", prob=1.0, eta=3.0),
-#                      mutation=get_mutation("int_pm", prob=1/X.shape[1], eta=3.0))
-        algo = self.algo_type(sampling=sampling, **self.algo_kwargs)
+        if useInteger:
+            algo = self.algo_type(sampling=sampling,
+                      crossover=get_crossover("int_sbx", prob=1.0, eta=3.0),
+                      mutation=get_mutation("int_pm", prob=1/X.shape[1], eta=3.0))
+        else:
+            algo = self.algo_type(sampling=sampling, **self.algo_kwargs)
 
         # optimization
         res = minimize(problem, algo, ('n_gen', self.n_gen))

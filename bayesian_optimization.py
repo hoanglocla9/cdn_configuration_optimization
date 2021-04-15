@@ -28,9 +28,9 @@ import matplotlib.pyplot as pl
 
 
 def main():
-    jsonFile = "/home/hpcc/cdn_configuration_optimization/config/json/france_cdn.json"
-    configDirPath = "/home/hpcc/cdn_configuration_optimization/config/france_cdn/"
-    dataPath = "/home/hpcc/cdn_configuration_optimization/data/"
+    jsonFile = "/home/loclh/cdn_configuration_optimization/config/json/france_cdn.json"
+    configDirPath = "/home/loclh/cdn_configuration_optimization/config/france_cdn/"
+    dataPath = "/home/loclh/cdn_configuration_optimization/data/"
     
     config = loadJSON(jsonFile)
     interval = 1 if "custom" not in config["RequestModels"] else config["RequestModels"]["custom"]["interval"]

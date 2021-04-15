@@ -29,10 +29,12 @@ class MOBO:
         self.useInteger = framework_args['surrogate']['useInteger']
         
         ### disable interger-based kernel
-        framework_args['surrogate']['useInteger'] = False
         
         bounds = np.array([problem.xl, problem.xu])
-        self.transformation = StandardTransform(bounds) # data normalization for surrogate model fitting
+        if not self.useInteger:
+            self.transformation = StandardTransform(bounds) # data normalization for surrogate model fitting
+        else:
+            self.transformation = None
         # framework components
         framework_args['surrogate']['n_var'] = self.n_var # for surrogate fitting
         framework_args['surrogate']['n_obj'] = self.n_obj # for surroagte fitting
@@ -93,8 +95,9 @@ class MOBO:
             timer = Timer()
 
             # data normalization
-            self.transformation.fit(self.X, self.Y)
-            X, Y = self.transformation.do(self.X, self.Y)
+            if not self.useInteger:
+                self.transformation.fit(self.X, self.Y)
+                X, Y = self.transformation.do(self.X, self.Y)
             # build surrogate models
             self.surrogate_model.fit(X, Y)
             timer.log('Surrogate model fitted')
@@ -105,7 +108,7 @@ class MOBO:
             # solve surrogate problem
             surr_problem = SurrogateProblem(self.real_problem, self.surrogate_model, self.acquisition, self.transformation)
                 
-            solution = self.solver.solve(surr_problem, X, Y)
+            solution = self.solver.solve(surr_problem, X, Y, self.useInteger)
             timer.log('Surrogate problem solved')
 
             # batch point selection
@@ -114,6 +117,7 @@ class MOBO:
             timer.log('Next sample batch selected')
             if self.useInteger:
                 X_next = np.round(X_next)
+            print(X_next)
             # update dataset
             Y_next = self.real_problem.evaluate(X_next, return_values_of="F")
             self._update_status(X_next, Y_next)

@@ -2,7 +2,7 @@ general:
   problem: cdn_ram
   n_var: 13
   n_obj: 2
-  n_init_sample: 100
+  n_init_sample: 30
   n_iter: 500
   ref_point: null
   batch_size: 30
@@ -12,7 +12,7 @@ general:
   subfolder: default
   exp_name: null
   log_to_file: false
-  n_process: 36
+  n_process: 48
 surrogate:
   surrogate: gp
   n_spectral_pts: 100
@@ -28,7 +28,7 @@ solver:
   pop_size: 100
   n_gen: 50
   pop_init_method: nds
-  n_process: 36
+  n_process: 48
   batch_size: 10
   n_cell: null
   cell_size: 10

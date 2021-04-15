@@ -20,7 +20,7 @@ def get_general_args(args=None):
         help='number of design variables')
     parser.add_argument('--n-obj', type=int, default=2, 
         help='number of objectives')
-    parser.add_argument('--n-init-sample', type=int, default=100, 
+    parser.add_argument('--n-init-sample', type=int, default=30, 
         help='number of initial design samples')
     parser.add_argument('--n-iter', type=int, default=500, 
         help='number of optimization iterations')
@@ -66,7 +66,7 @@ def get_surroagte_args(args=None):
         help='parameter nu for matern kernel (integer, -1 means inf)')
     parser.add_argument('--mean-sample', default=False, action='store_true', 
         help='use mean sample when sampling objective functions')
-    parser.add_argument('--useInteger',  default=True, 
+    parser.add_argument('--useInteger',  default=False, 
         help='Integer variable or not')
     args, _ = parser.parse_known_args(args)
     return args

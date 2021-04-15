@@ -318,9 +318,9 @@ def runSimulationWithPredefinedDistribution(fileSize, mode, routingTable, topo, 
 if __name__ == '__main__':
     global dataPath
     
-    jsonFile = "/home/picarib/Desktop/cdn_optimization/config/json/ntt.json"
-    configDirPath = "/home/picarib/Desktop/cdn_optimization/config/ntt/"
-    dataPath = "/home/picarib/Desktop/cdn_optimization/data/"
+    jsonFile = "/home/loclh/cdn_configuration_optimization/config/json/france_cdn.json"
+    configDirPath = "/home/loclh/cdn_configuration_optimization/config/france_cdn/"
+    dataPath = "/home/loclh/cdn_configuration_optimization/data/"
     
     config = loadJSON(jsonFile)
     interval = 1 if "custom" not in config["RequestModels"] else config["RequestModels"]["custom"]["interval"]
