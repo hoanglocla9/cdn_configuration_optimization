@@ -1,0 +1,39 @@
+{
+    "NetworkId": "sbd_custom-origin",
+    "RequestModels": {
+        "custom": {"path": "/home/picarib/Desktop/mininet-simulation/dataset/FPT_Day_6_full_fileSize_timeStamp/", "interval": 24, "delta_T": 60, "alpha": 1.0}
+    },
+    "RoutingMode": "no-color",
+    "isLoadRTable": false,
+    "isLoadSeparatorRank": false,
+    "separatorRankIncrement": 3,
+    "samplingMethod": null,
+    "FileSize": -1,
+    "colorNums": 4,
+    "cpuScheduler": "cfs",
+    "Routers": [
+        { "ID": "mainServer", "IP": "192.168.0.1/24", "dimage": "laloc2496/cdn_origin:latest"},
+        { "ID": "router_1", "IP": "192.168.1.1/26", "maxSize": 5368709120, "dimage": "leaf_node:latest"},
+        { "ID": "router_2", "IP": "192.168.2.1/26", "maxSize": 5368709120, "dimage": "leaf_node:latest"},
+        { "ID": "router_3", "IP": "192.168.3.1/26", "maxSize": 5368709120, "dimage": "leaf_node:latest"},
+        { "ID": "router_4", "IP": "192.168.4.1/26", "maxSize": 10737418240, "dimage": "edge_node:latest"}
+    ],
+    "Clients": [
+        { "ID": "client_1", "IP": "192.168.1.2/26", "gateway": "192.168.1.1", "isTemp": false},
+        { "ID": "client_2", "IP": "192.168.2.2/26", "gateway": "192.168.2.1", "isTemp": false},
+        { "ID": "client_3", "IP": "192.168.3.2/26", "gateway": "192.168.3.1", "isTemp": false},
+        { "ID": "client_4", "IP": "192.168.4.2/26", "gateway": "192.168.4.1", "isTemp": true}
+    ],
+    "Links": [
+        { "NodeIds": ["router_1/1", "client_1"], "params1": {"bw": 150, "delay": "1us", "ip": "192.168.1.1/26"}},
+        { "NodeIds": ["router_2/1", "client_2"], "params1": {"bw": 150, "delay": "1us", "ip": "192.168.2.1/26"}},
+        { "NodeIds": ["router_3/1", "client_3"], "params1": {"bw": 150, "delay": "1us", "ip": "192.168.3.1/26"}},
+        { "NodeIds": ["router_4/1", "client_4"], "params1": {"bw": 150, "delay": "1us", "ip": "192.168.4.1/26"}},
+        
+        { "NodeIds": ["router_1/2", "router_4/2"], "params1": {"bw": 200, "delay": "1us", "ip": "10.1.4.1/24"}, "params2": {"ip": "10.1.4.2/24"}},
+        { "NodeIds": ["router_2/2", "router_4/3"], "params1": {"bw": 200, "delay": "1us", "ip": "10.2.4.1/24"}, "params2": {"ip": "10.2.4.2/24"}},
+        { "NodeIds": ["router_3/2", "router_4/4"], "params1": {"bw": 200, "delay": "1us", "ip": "10.3.4.1/24"}, "params2": {"ip": "10.3.4.2/24"}},
+        
+        { "NodeIds": ["mainServer/2", "router_4/10"], "params1": {"bw": 100, "delay": "1us", "ip": "10.4.0.1/24"}, "params2": {"ip": "10.4.0.2/24"}}
+    ]
+}
