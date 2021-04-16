@@ -98,6 +98,8 @@ class MOBO:
             if not self.useInteger:
                 self.transformation.fit(self.X, self.Y)
                 X, Y = self.transformation.do(self.X, self.Y)
+            else:
+                X, Y = self.X, self.Y
             # build surrogate models
             self.surrogate_model.fit(X, Y)
             timer.log('Surrogate model fitted')
@@ -110,14 +112,12 @@ class MOBO:
                 
             solution = self.solver.solve(surr_problem, X, Y, self.useInteger)
             timer.log('Surrogate problem solved')
-
             # batch point selection
             self.selection.fit(X, Y)
             X_next, self.info = self.selection.select(solution, self.surrogate_model, self.status, self.transformation)
             timer.log('Next sample batch selected')
-            if self.useInteger:
-                X_next = np.round(X_next)
-            print(X_next)
+         #   if not self.useInteger:
+       #         X_next = np.round(X_next)
             # update dataset
             Y_next = self.real_problem.evaluate(X_next, return_values_of="F")
             self._update_status(X_next, Y_next)
