@@ -140,12 +140,16 @@ class GaussianProcess(SurrogateModel):
                 if useInteger:
                     main_kernel = IntegerBasedKernel(length_scale=np.ones(n_var), length_scale_bounds=(np.sqrt(1e-3), np.sqrt(1e3)), nu=0.5 * nu) # 
                 else:
-                    main_kernel = Matern(length_scale=np.ones(n_var), length_scale_bounds=(1e-12, 1e12), nu=0.5 * 3) # , length_scale_bounds=(np.sqrt(1e-16), np.sqrt(1e16))
+                    main_kernel = Matern(length_scale=np.ones(n_var), length_scale_bounds=(np.sqrt(1e-3), np.sqrt(1e3)), nu=0.5 * nu) # , length_scale_bounds=(np.sqrt(1e-16), np.sqrt(1e16))
             else:
                 main_kernel = RBF(length_scale=np.ones(n_var), length_scale_bounds=(np.sqrt(1e-3), np.sqrt(1e3)))
             # , constant_value_bounds=(np.sqrt(1e-3), np.sqrt(1e3)) ConstantKernel(constant_value=1e-2, constant_value_bounds=(np.sqrt(1e-6), np.sqrt(1e6))) *
-            kernel =  main_kernel #+ \
+            if useInteger:
+                kernel = main_kernel #+ \
                                    # ConstantKernel(constant_value=1e-2, constant_value_bounds=(np.exp(-6), np.exp(0)))
+            else:
+                kernel =  ConstantKernel(constant_value=1.0, constant_value_bounds=(np.sqrt(1e-3), np.sqrt(1e3))) * main_kernel + \
+                                         ConstantKernel(constant_value=1e-2, constant_value_bounds=(np.exp(-6), np.exp(0)))
             # , constant_value_bounds=(np.exp(-6), np.exp(0)
             
             gp = GaussianProcessRegressor(kernel=kernel, optimizer=constrained_optimization)
