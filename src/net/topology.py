@@ -22,7 +22,7 @@ class NetTopology (object):
         self.fileSize = fileSize
         
     def saveCacheDict(self):
-        with open(os.path.join(self.configDirPath, "cacheDict" + str(self.parallel_idx) + ".pkl"), 'wb') as f:
+        with open(os.path.join(self.configDirPath, "cacheDict.pkl"), 'wb') as f:
             pickle.dump(self.cacheMemoryDict, f)
             
     def reconfig(self, cacheSizeList, parallel_idx):
@@ -45,18 +45,25 @@ class NetTopology (object):
                 idx += 1
         self.warmUp()
         
-    def warmUp(self):
+    def warmUp(self, savedFile="tmp/warmUpFile.pkl"):
         if self.mode == "no-cache":
             pass
         elif self.mode == "no-color":
-            warmUpReqDict = {}
             routingTable = {}
-            for client in self.clientIds:
-                if self.contentGenerator.dist != None:
-                    warmUpReqDict[client] = self.contentGenerator.randomGen(self.warmUpReqNums)
-                else:
-                    cache = client.replace("client", "Cache")
-                    warmUpReqDict[client] = self.contentGenerator.custom_data[cache]["Interval0"]
+            if os.path.isfile(savedFile):
+                with open(savedFile, "rb") as f:
+                    warmUpReqDict = pickle.load(f)
+            else:
+                warmUpReqDict = {}
+                for client in self.clientIds:
+                    if self.contentGenerator.dist != None:
+                        warmUpReqDict[client] = self.contentGenerator.randomGen(self.warmUpReqNums)
+                    else:
+                        cache = client.replace("client", "Cache")
+                        warmUpReqDict[client] = self.contentGenerator.custom_data[cache]["Interval0"]
+                with open(savedFile, "wb") as f:
+                    pickle.dump(warmUpReqDict, f)
+                    
             warmUpCacheShortestPath(self.graph, self.cacheMemoryDict, self.fileSize, self.mode, routingTable, warmUpReqDict, warmUpReqDict.keys())
             self.saveCacheDict()  
         elif self.mode == "tag-color":
@@ -66,7 +73,8 @@ class NetTopology (object):
             self.colorRouteInfo, self.serverToColorMap = getColoringInfo(self.graph, self.colorList)
             self.assignColorForCacheMemory()
             self.saveNearestColorServerInfo()
-    
+            
+        
                 
     def saveNearestColorServerInfo(self):
         with open(os.path.join(self.configDirPath, "nearestColorServerInfo.pkl"), "wb") as f:
