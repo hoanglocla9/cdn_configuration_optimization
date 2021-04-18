@@ -75,7 +75,7 @@ class Custom(MOBO):
     '''
     config = {
         'surrogate': 'gp',
-        'acquisition': 'ucb',
+        'acquisition': 'ei',
         'solver': 'nsga2',
         'selection': 'uncertainty',
     }

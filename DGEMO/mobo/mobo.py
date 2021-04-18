@@ -109,18 +109,22 @@ class MOBO:
             
             # solve surrogate problem
             surr_problem = SurrogateProblem(self.real_problem, self.surrogate_model, self.acquisition, self.transformation)
-                
-            solution = self.solver.solve(surr_problem, X, Y, self.useInteger)
+            if self.useInteger:
+                bound = [surr_problem.xl, surr_problem.xu]
+            else:
+                bound = None
+            solution = self.solver.solve(surr_problem, X, Y, self.useInteger, bound)
             timer.log('Surrogate problem solved')
             # batch point selection
             self.selection.fit(X, Y)
             X_next, self.info = self.selection.select(solution, self.surrogate_model, self.status, self.transformation)
             timer.log('Next sample batch selected')
-         #   if not self.useInteger:
-       #         X_next = np.round(X_next)
+          #  if not self.useInteger:
+          #      X_next = np.round(X_next)
             # update dataset
+            X_temp = X_next.copy()
             Y_next = self.real_problem.evaluate(X_next, return_values_of="F")
-            self._update_status(X_next, Y_next)
+            self._update_status(X_temp, Y_next)
             timer.log('New samples evaluated')
 
             # statistics

@@ -25,17 +25,20 @@ class Solver:
         self.algo_kwargs = kwargs
         self.solution = None
 
-    def solve(self, problem, X, Y, useInteger):
+    def solve(self, problem, X, Y, useInteger, bound=None):
         '''
         Solve the multi-objective problem
         '''
         # initialize population
-        sampling = self._get_sampling(X, Y)
+        sampling = self._get_sampling(X, Y, bound)
+        if useInteger and bound is None:
+            print("error solver!!!") 
+            return
         # setup algorithm
         if useInteger:
             algo = self.algo_type(sampling=sampling,
                       crossover=get_crossover("int_one_point"),
-                      mutation=get_mutation("int_pm", prob=1/X.shape[1], eta=3))
+                      mutation=get_mutation("int_pm", prob=1/X.shape[1]))
         else:
             algo = self.algo_type(sampling=sampling, **self.algo_kwargs)
 
@@ -53,7 +56,7 @@ class Solver:
             self.solution['y'] = np.array(self.solution['y'])[indices]
         return self.solution
 
-    def _get_sampling(self, X, Y):
+    def _get_sampling(self, X, Y, bound=None):
         '''
         Initialize population from data
         '''
@@ -65,7 +68,12 @@ class Solver:
             sampling = X[np.concatenate(sorted_indices)][:pop_size]
             # NOTE: use lhs if current samples are not enough
             if len(sampling) < pop_size:
-                rest_sampling = lhs(X.shape[1], pop_size - len(sampling))
+                if bound is None:
+                    rest_sampling = lhs(X.shape[1], pop_size - len(sampling))
+                else:
+                    rest_sampling = lhs(X.shape[1], pop_size - len(sampling))
+                    rest_sampling = bound[0] + rest_sampling * (bound[1] - bound[0])
+                    rest_sampling = np.round(rest_sampling)
                 sampling = np.vstack([sampling, rest_sampling])
         elif self.pop_init_method == 'random':
             sampling = FloatRandomSampling()

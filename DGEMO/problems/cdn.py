@@ -8,7 +8,7 @@ from simulation import *
 import random, os, re
 
 class CDN(Problem):
-    def __init__ (self, n_var=13, n_obj=2, n_constr=0, xl=10, xu=80, min_cost=0.5):
+    def __init__ (self, n_var=4, n_obj=2, n_constr=0, xl=10, xu=80, min_cost=0.5):
         super().__init__(n_var=n_var, n_obj=n_obj, n_constr=n_constr, xl=xl, xu=xu)
         self.min_cost = min_cost
         self.count_step = 0
