@@ -34,8 +34,8 @@ class Solver:
         # setup algorithm
         if useInteger:
             algo = self.algo_type(sampling=sampling,
-                      crossover=get_crossover("int_sbx", prob=1.0, eta=3.0),
-                      mutation=get_mutation("int_pm", prob=1/X.shape[1], eta=3.0))
+                      crossover=get_crossover("int_one_point"),
+                      mutation=get_mutation("int_pm", prob=1/X.shape[1], eta=3))
         else:
             algo = self.algo_type(sampling=sampling, **self.algo_kwargs)
 
