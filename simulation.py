@@ -276,21 +276,18 @@ def runSimulationWithRealDataset(interval, fileSize, mode, routingTable, topo, c
 
     return traffic
 
-def runSimulationWithPredefinedDistribution(fileSize, mode, routingTable, topo, colorList, runReqNums, warmUpReqNums, separatorRankIncrement, parallel_idx=0):
+def runSimulationWithPredefinedDistribution(fileSize, mode, routingTable, topo, colorList, runReqNums, warmUpReqNums, separatorRankIncrement, generateData, parallel_idx=0):
     graph = topo.graph
     cacheDict = topo.cacheMemoryDict
-    custom_data = topo.contentGenerator.custom_data
     clientIds = topo.clientIds
-    uniqueSortedContentList = topo.contentGenerator.uniqueSortedContentList["noInterval"]
-    contentGenerator =topo.contentGenerator
+    
+    contentGenerator = topo.contentGenerator
     cacheCapacity = cacheDict[list(cacheDict.keys())[0]].maxSize
     traffic = 0
     hit, hit1, miss = 0,0,0
-    generateData = {}
-    for client in topo.clientIds:
-        cacheId = client.replace("client", "Cache")
-        generateData[cacheId] = {"noInterval": topo.contentGenerator.randomGen(runReqNums)}
-            
+    uniqueSortedContentList = topo.contentGenerator.uniqueSortedContentList["noInterval"]
+    
+                
     if mode == "no-color":
         hitRateDict, traffic = runWithShortestPath(graph, cacheDict, fileSize, mode, routingTable, generateData, clientIds, "noInterval")
     elif mode == "full-color": # color
@@ -322,6 +319,7 @@ if __name__ == '__main__':
     configDirPath = "/home/loclh/cdn_configuration_optimization/config/france_cdn/"
     dataPath = "/home/loclh/cdn_configuration_optimization/data/"
     
+    
     config = loadJSON(jsonFile)
     interval = 1 if "custom" not in config["RequestModels"] else config["RequestModels"]["custom"]["interval"]
     mode = config["RoutingMode"]  # [no-cache, no-color, tag-color, full-color]
@@ -341,5 +339,5 @@ if __name__ == '__main__':
         result = runSimulationWithRealDataset(interval, fileSize, mode, routingTable, topo, colorList, runReqNums, warmUpReqNums, separatorRankIncrement)
     else:
         MAX_COUNT_INDEX = 0
-        result = runSimulationWithPredefinedDistribution(fileSize, mode, routingTable, topo, colorList, runReqNums, warmUpReqNums, separatorRankIncrement)
+        result = runSimulationWithPredefinedDistribution(fileSize, mode, routingTable, topo, colorList, runReqNums, warmUpReqNums, separatorRankIncrement, savePredefinedContent=savePredefinedContent)
     print(result)

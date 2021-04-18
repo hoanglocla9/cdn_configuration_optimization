@@ -34,7 +34,7 @@ def get_general_args(args=None):
     parser.add_argument('--n-seed', type=int, default=1,
         help='number of random seeds / test runs')
 
-    parser.add_argument('--algo', type=str, default='usemo-ei',
+    parser.add_argument('--algo', type=str, default='custom',
         help='type of algorithm to use with some predefined arguments, or custom arguments')
 
     parser.add_argument('--subfolder', type=str, default='default',

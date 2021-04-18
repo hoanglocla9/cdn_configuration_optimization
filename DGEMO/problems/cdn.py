@@ -8,11 +8,11 @@ from simulation import *
 import random, os, re
 
 class CDN(Problem):
-    def __init__ (self, n_var=13, n_obj=2, n_constr=0, xl=100, xu=800, min_cost=0.5):
+    def __init__ (self, n_var=13, n_obj=2, n_constr=0, xl=10, xu=80, min_cost=0.5):
         super().__init__(n_var=n_var, n_obj=n_obj, n_constr=n_constr, xl=xl, xu=xu)
         self.min_cost = min_cost
         self.count_step = 0
-
+        
 class CDN_RAM(CDN):
     def _calc_pareto_front(self, n_pareto_points=100):
         raise "Not implement yet"
@@ -32,9 +32,9 @@ class CDN_RAM(CDN):
         for f in os.listdir("./tmp/"):
             if re.search("save_*", f):
                 os.remove(os.path.join("./tmp", f))
-        for f in os.listdir("./config/france_cdn/"):
+        for f in os.listdir("./config/sbd_custom/"):
             if re.search("cacheDict*", f):
-                os.remove(os.path.join("./config/france_cdn", f))
+                os.remove(os.path.join("./config/sbd_custom", f))
     def get_parameters(self, topo, fileSize, mode, colorList, runReqNums, warmUpReqNums, separatorRankIncrement, n_process):
         self.topo = topo
         self.fileSize = fileSize
@@ -44,7 +44,18 @@ class CDN_RAM(CDN):
         self.warmUpReqNums = warmUpReqNums
         self.separatorRankIncrement = separatorRankIncrement
         self.n_process = n_process
-
+        savePredefinedContent = os.path.join("tmp/", "save_content.pkl")
+        if os.path.isfile(savePredefinedContent):
+            with open(savePredefinedContent, "rb") as f:
+                generateData = pickle.load(f)
+        else:
+            generateData = {}
+            for client in self.topo.clientIds:
+                cacheId = client.replace("client", "Cache")
+                generateData[cacheId] = {"noInterval": self.topo.contentGenerator.randomGen(self.runReqNums)}
+            with open(savePredefinedContent, "wb") as f:
+                pickle.dump(generateData, f)
+        self.generateData = generateData
         
     def performance_function_parallel(self, cacheSizeFactorList):
         randomIdxList = []
@@ -69,7 +80,7 @@ class CDN_RAM(CDN):
         fileSize, mode, topo, colorList, runReqNums, warmUpReqNums, separatorRankIncrement, cacheSizeFactorList = data
         topo.reconfig(cacheSizeFactorList, idx)
         routingTable = {}
-        traffic = runSimulationWithPredefinedDistribution(fileSize, mode, routingTable, topo, colorList, runReqNums, warmUpReqNums, separatorRankIncrement, idx)
+        traffic = runSimulationWithPredefinedDistribution(fileSize, mode, routingTable, topo, colorList, runReqNums, warmUpReqNums, separatorRankIncrement, self.generateData, idx)
 
        
         del data, fileSize, mode, topo, colorList, runReqNums, warmUpReqNums, separatorRankIncrement, cacheSizeFactorList
@@ -82,7 +93,7 @@ class CDN_RAM(CDN):
                 cacheSizeFactorList[i][j] = int(cacheSizeFactorList[i][j] * 1024) # * (800*1024-100*1024) + 100 *1024
             self.topo.reconfig(cacheSizeFactorList[i])
             routingTable = {}
-            traffic = runSimulationWithPredefinedDistribution(self.fileSize, self.mode, routingTable, self.topo, self.colorList, self.runReqNums, self.warmUpReqNums, self.separatorRankIncrement, 0)
+            traffic = runSimulationWithPredefinedDistribution(self.fileSize, self.mode, routingTable, self.topo, self.colorList, self.runReqNums, self.warmUpReqNums, self.separatorRankIncrement, self.generateData, 0)
             results.append(traffic)
         
         return np.array(results)

@@ -1,9 +1,9 @@
 general:
   problem: cdn_ram
-  n_var: 13
+  n_var: 4
   n_obj: 2
-  n_init_sample: 30
-  n_iter: 500
+  n_init_sample: 100
+  n_iter: 20
   ref_point: null
   batch_size: 30
   seed: 0
@@ -12,24 +12,24 @@ general:
   subfolder: default
   exp_name: null
   log_to_file: false
-  n_process: 48
+  n_process: 6
 surrogate:
   surrogate: gp
   n_spectral_pts: 100
   nu: 5
   mean_sample: false
-  useInteger: false
-  n_var: 13
+  useInteger: true
+  n_var: 4
   n_obj: 2
 acquisition:
   acquisition: identity
 solver:
   solver: nsga2
   pop_size: 100
-  n_gen: 50
+  n_gen: 200
   pop_init_method: nds
-  n_process: 48
-  batch_size: 10
+  n_process: 6
+  batch_size: 20
   n_cell: null
   cell_size: 10
   buffer_origin: null

@@ -100,7 +100,6 @@ class GammaDistribution:
             if self.cdfMemo[i-1] > mark:
                 return i
             
-            
     def pdf(self, x): # K = a, theta = lambda
         return math.pow(x, self.K-1) * math.exp(-x/self.theta) / (math.gamma(self.K) * math.pow(self.theta, self.K))
 
@@ -152,7 +151,7 @@ class ContentGenerator:
         if self.dist == None:
             return None
         dic = {}
-        for i in range(self.dist.length):
+        for i in range(self.dist.length * 10):
             temp = str(self.dist.Intn())
             if temp in dic:
                 dic[temp] += 1
