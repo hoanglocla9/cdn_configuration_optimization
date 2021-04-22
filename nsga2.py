@@ -29,7 +29,7 @@ def get_args():
 
     parser.add_argument('--problem', type=str, default='cdn_ram', 
         help='optimization problem')
-    parser.add_argument('--n-var', type=int, default=13, 
+    parser.add_argument('--n-var', type=int, default=4, 
         help='number of design variables')
     parser.add_argument('--n-obj', type=int, default=2, 
         help='number of objectives')
@@ -39,7 +39,7 @@ def get_args():
         help='number of optimization iterations')
     parser.add_argument('--ref-point', type=float, nargs='+', default=None, 
         help='reference point for calculating hypervolume')
-    parser.add_argument('--batch-size', type=int, default=20, 
+    parser.add_argument('--batch-size', type=int, default=10, 
         help='size of the evaluated batch in one iteration')
     parser.add_argument('--pop-init-method', type=str, choices=['nds', 'random', 'lhs'], default='nds', 
         help='method to init population')
@@ -162,8 +162,7 @@ def main():
     
     # initialize evolutionary algorithm
     ea_algorithm = NSGA2(pop_size=args.batch_size, sampling=sampling, crossover=get_crossover("int_one_point"),
-                  mutation=get_mutation("int_pm", prob=1.0/13),
-                  eliminate_duplicates=True)
+                  mutation=get_mutation("int_pm", prob=1.0/13))
 
     # find Pareto front
     res = minimize(problem, ea_algorithm, ('n_gen', args.n_iter), save_history=True)
@@ -172,8 +171,6 @@ def main():
 
     # update data exporter
     for X_next, Y_next in zip(X_history, Y_history):
-        print(X_next.shape)
-        print(Y_next.shape)
         exporter.update(X_next, Y_next)
 
     # export all result to csv

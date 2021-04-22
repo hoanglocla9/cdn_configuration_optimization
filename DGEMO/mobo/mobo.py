@@ -119,12 +119,14 @@ class MOBO:
             self.selection.fit(X, Y)
             X_next, self.info = self.selection.select(solution, self.surrogate_model, self.status, self.transformation)
             timer.log('Next sample batch selected')
-          #  if not self.useInteger:
-          #      X_next = np.round(X_next)
+            if not self.useInteger:
+                X_temp = np.round(X_next.copy())
+            else:
+                X_temp = X_next.copy()
             # update dataset
-            X_temp = X_next.copy()
-            Y_next = self.real_problem.evaluate(X_next, return_values_of="F")
-            self._update_status(X_temp, Y_next)
+            
+            Y_next = self.real_problem.evaluate(X_temp, return_values_of="F")
+            self._update_status(X_next, Y_next)
             timer.log('New samples evaluated')
 
             # statistics
