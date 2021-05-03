@@ -5,4 +5,3 @@ from DGEMO.problems.oka import OKA1, OKA2
 from DGEMO.problems.vlmop import VLMOP2, VLMOP3
 from DGEMO.problems.re import RE1, RE2, RE3, RE4, RE5, RE6, RE7
 from DGEMO.problems.cdn import CDN_RAM
-from DGEMO.problems.cdn import CDN_Topology
