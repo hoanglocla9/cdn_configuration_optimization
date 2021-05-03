@@ -1,0 +1,709 @@
+*** Processing content list
+
+Start the optimizer
+========== Problem Definition ==========
+# name: CDN_RAM
+# n_var: 4
+# n_obj: 2
+# n_constr: 0
+
+========== Framework Description ==========
+# algorithm: TSEMO
+# surrogate: ThompsonSampling
+# acquisition: IdentityFunc
+# solver: NSGA2Solver
+# selection: HVI
+
+
+Compiled modules for significant speedup can not be used!
+https://pymoo.org/installation.html#installation
+
+To disable this warning:
+from pymoo.configuration import Configuration
+Configuration.show_compile_hint = False
+
+========== Iteration 0 ==========
+Surrogate model fitted: 0.43s
+Surrogate problem solved: 107.57s
+Next sample batch selected: 1.92s
+New samples evaluated: 0.60s
+Total runtime: 110.52s
+Total evaluations: 110, hypervolume: 29043.0000
+
+========== Iteration 1 ==========
+Surrogate model fitted: 0.63s
+Surrogate problem solved: 105.32s
+Next sample batch selected: 2.22s
+New samples evaluated: 0.61s
+Total runtime: 219.52s
+Total evaluations: 120, hypervolume: 29257.0000
+
+========== Iteration 2 ==========
+Surrogate model fitted: 0.75s
+Surrogate problem solved: 106.06s
+Next sample batch selected: 2.35s
+New samples evaluated: 0.63s
+Total runtime: 329.60s
+Total evaluations: 130, hypervolume: 29461.0000
+
+========== Iteration 3 ==========
+Surrogate model fitted: 1.97s
+Surrogate problem solved: 108.06s
+Next sample batch selected: 2.45s
+New samples evaluated: 0.65s
+Total runtime: 443.06s
+Total evaluations: 140, hypervolume: 29461.0000
+
+========== Iteration 4 ==========
+Surrogate model fitted: 1.20s
+Surrogate problem solved: 107.76s
+Next sample batch selected: 2.51s
+New samples evaluated: 0.63s
+Total runtime: 555.44s
+Total evaluations: 150, hypervolume: 29461.0000
+
+========== Iteration 5 ==========
+Surrogate model fitted: 1.14s
+Surrogate problem solved: 106.10s
+Next sample batch selected: 2.54s
+New samples evaluated: 0.64s
+Total runtime: 666.22s
+Total evaluations: 160, hypervolume: 29806.0000
+
+========== Iteration 6 ==========
+Surrogate model fitted: 1.18s
+Surrogate problem solved: 106.64s
+Next sample batch selected: 2.62s
+New samples evaluated: 0.62s
+Total runtime: 777.64s
+Total evaluations: 170, hypervolume: 30102.0000
+
+========== Iteration 7 ==========
+Surrogate model fitted: 1.36s
+Surrogate problem solved: 106.56s
+Next sample batch selected: 2.63s
+New samples evaluated: 0.64s
+Total runtime: 889.05s
+Total evaluations: 180, hypervolume: 30426.0000
+
+========== Iteration 8 ==========
+Surrogate model fitted: 1.46s
+Surrogate problem solved: 105.83s
+Next sample batch selected: 2.43s
+New samples evaluated: 0.64s
+Total runtime: 999.75s
+Total evaluations: 190, hypervolume: 30516.0000
+
+========== Iteration 9 ==========
+Surrogate model fitted: 2.33s
+Surrogate problem solved: 107.24s
+Next sample batch selected: 2.32s
+New samples evaluated: 0.64s
+Total runtime: 1112.64s
+Total evaluations: 200, hypervolume: 30629.0000
+
+========== Iteration 10 ==========
+Surrogate model fitted: 2.72s
+Surrogate problem solved: 106.61s
+Next sample batch selected: 2.42s
+New samples evaluated: 0.64s
+Total runtime: 1225.41s
+Total evaluations: 210, hypervolume: 30647.0000
+
+========== Iteration 11 ==========
+Surrogate model fitted: 0.85s
+Surrogate problem solved: 106.69s
+Next sample batch selected: 2.55s
+New samples evaluated: 0.61s
+Total runtime: 1336.40s
+Total evaluations: 220, hypervolume: 30650.0000
+
+========== Iteration 12 ==========
+Surrogate model fitted: 0.29s
+Surrogate problem solved: 106.87s
+Next sample batch selected: 2.56s
+New samples evaluated: 0.65s
+Total runtime: 1447.15s
+Total evaluations: 230, hypervolume: 30772.0000
+
+========== Iteration 13 ==========
+Surrogate model fitted: 0.64s
+Surrogate problem solved: 107.67s
+Next sample batch selected: 2.55s
+New samples evaluated: 0.64s
+Total runtime: 1559.04s
+Total evaluations: 240, hypervolume: 30913.0000
+
+========== Iteration 14 ==========
+Surrogate model fitted: 0.33s
+Surrogate problem solved: 106.75s
+Next sample batch selected: 2.51s
+New samples evaluated: 0.65s
+Total runtime: 1669.56s
+Total evaluations: 250, hypervolume: 30913.0000
+
+========== Iteration 15 ==========
+Surrogate model fitted: 0.35s
+Surrogate problem solved: 106.91s
+Next sample batch selected: 2.50s
+New samples evaluated: 0.65s
+Total runtime: 1780.34s
+Total evaluations: 260, hypervolume: 30913.0000
+
+========== Iteration 16 ==========
+Surrogate model fitted: 0.36s
+Surrogate problem solved: 106.39s
+Next sample batch selected: 2.63s
+New samples evaluated: 0.66s
+Total runtime: 1890.75s
+Total evaluations: 270, hypervolume: 31269.0000
+
+========== Iteration 17 ==========
+Surrogate model fitted: 0.40s
+Surrogate problem solved: 106.85s
+Next sample batch selected: 2.75s
+New samples evaluated: 0.64s
+Total runtime: 2001.76s
+Total evaluations: 280, hypervolume: 31304.0000
+
+========== Iteration 18 ==========
+Surrogate model fitted: 0.40s
+Surrogate problem solved: 107.65s
+Next sample batch selected: 2.83s
+New samples evaluated: 0.68s
+Total runtime: 2113.63s
+Total evaluations: 290, hypervolume: 31376.0000
+
+========== Iteration 19 ==========
+Surrogate model fitted: 0.40s
+Surrogate problem solved: 107.93s
+Next sample batch selected: 2.97s
+New samples evaluated: 0.63s
+Total runtime: 2225.97s
+Total evaluations: 300, hypervolume: 31376.0000
+
+========== Iteration 20 ==========
+Surrogate model fitted: 0.48s
+Surrogate problem solved: 107.12s
+Next sample batch selected: 2.97s
+New samples evaluated: 0.61s
+Total runtime: 2337.46s
+Total evaluations: 310, hypervolume: 31586.0000
+
+========== Iteration 21 ==========
+Surrogate model fitted: 0.49s
+Surrogate problem solved: 108.42s
+Next sample batch selected: 3.00s
+New samples evaluated: 0.63s
+Total runtime: 2450.31s
+Total evaluations: 320, hypervolume: 32028.0000
+
+========== Iteration 22 ==========
+Surrogate model fitted: 0.51s
+Surrogate problem solved: 108.92s
+Next sample batch selected: 2.77s
+New samples evaluated: 0.64s
+Total runtime: 2563.45s
+Total evaluations: 330, hypervolume: 32194.0000
+
+========== Iteration 23 ==========
+Surrogate model fitted: 0.54s
+Surrogate problem solved: 109.42s
+Next sample batch selected: 3.04s
+New samples evaluated: 0.66s
+Total runtime: 2677.50s
+Total evaluations: 340, hypervolume: 32346.0000
+
+========== Iteration 24 ==========
+Surrogate model fitted: 0.57s
+Surrogate problem solved: 106.92s
+Next sample batch selected: 2.87s
+New samples evaluated: 0.66s
+Total runtime: 2788.79s
+Total evaluations: 350, hypervolume: 32378.0000
+
+========== Iteration 25 ==========
+Surrogate model fitted: 0.61s
+Surrogate problem solved: 107.02s
+Next sample batch selected: 2.95s
+New samples evaluated: 0.65s
+Total runtime: 2900.38s
+Total evaluations: 360, hypervolume: 32378.0000
+
+========== Iteration 26 ==========
+Surrogate model fitted: 0.63s
+Surrogate problem solved: 108.02s
+Next sample batch selected: 2.98s
+New samples evaluated: 0.66s
+Total runtime: 3012.98s
+Total evaluations: 370, hypervolume: 32378.0000
+
+========== Iteration 27 ==========
+Surrogate model fitted: 0.66s
+Surrogate problem solved: 107.01s
+Next sample batch selected: 2.97s
+New samples evaluated: 0.63s
+Total runtime: 3124.65s
+Total evaluations: 380, hypervolume: 32378.0000
+
+========== Iteration 28 ==========
+Surrogate model fitted: 0.70s
+Surrogate problem solved: 107.93s
+Next sample batch selected: 2.97s
+New samples evaluated: 0.66s
+Total runtime: 3237.15s
+Total evaluations: 390, hypervolume: 32399.0000
+
+========== Iteration 29 ==========
+Surrogate model fitted: 0.74s
+Surrogate problem solved: 108.98s
+Next sample batch selected: 3.21s
+New samples evaluated: 0.68s
+Total runtime: 3351.02s
+Total evaluations: 400, hypervolume: 32602.0000
+
+*** Processing content list
+
+Start the optimizer
+========== Problem Definition ==========
+# name: CDN_RAM
+# n_var: 4
+# n_obj: 2
+# n_constr: 0
+
+========== Framework Description ==========
+# algorithm: TSEMO
+# surrogate: ThompsonSampling
+# acquisition: IdentityFunc
+# solver: NSGA2Solver
+# selection: HVI
+
+
+Compiled modules for significant speedup can not be used!
+https://pymoo.org/installation.html#installation
+
+To disable this warning:
+from pymoo.configuration import Configuration
+Configuration.show_compile_hint = False
+
+========== Iteration 0 ==========
+Surrogate model fitted: 0.76s
+Surrogate problem solved: 106.25s
+Next sample batch selected: 1.68s
+New samples evaluated: 0.58s
+Total runtime: 109.26s
+Total evaluations: 110, hypervolume: 34106.0000
+
+========== Iteration 1 ==========
+Surrogate model fitted: 0.68s
+Surrogate problem solved: 103.68s
+Next sample batch selected: 1.67s
+New samples evaluated: 0.59s
+Total runtime: 216.09s
+Total evaluations: 120, hypervolume: 34292.0000
+
+========== Iteration 2 ==========
+Surrogate model fitted: 1.19s
+Surrogate problem solved: 104.89s
+Next sample batch selected: 1.84s
+New samples evaluated: 0.64s
+Total runtime: 324.86s
+Total evaluations: 130, hypervolume: 34341.0000
+
+========== Iteration 3 ==========
+Surrogate model fitted: 0.16s
+Surrogate problem solved: 105.92s
+Next sample batch selected: 1.88s
+New samples evaluated: 0.63s
+Total runtime: 433.82s
+Total evaluations: 140, hypervolume: 34355.0000
+
+========== Iteration 4 ==========
+Surrogate model fitted: 0.17s
+Surrogate problem solved: 105.76s
+Next sample batch selected: 2.02s
+New samples evaluated: 0.63s
+Total runtime: 542.70s
+Total evaluations: 150, hypervolume: 36424.0000
+
+========== Iteration 5 ==========
+Surrogate model fitted: 0.18s
+Surrogate problem solved: 105.47s
+Next sample batch selected: 1.92s
+New samples evaluated: 0.63s
+Total runtime: 651.27s
+Total evaluations: 160, hypervolume: 36447.0000
+
+========== Iteration 6 ==========
+Surrogate model fitted: 0.19s
+Surrogate problem solved: 104.68s
+Next sample batch selected: 1.91s
+New samples evaluated: 0.63s
+Total runtime: 758.90s
+Total evaluations: 170, hypervolume: 36859.0000
+
+========== Iteration 7 ==========
+Surrogate model fitted: 0.22s
+Surrogate problem solved: 105.47s
+Next sample batch selected: 2.14s
+New samples evaluated: 0.61s
+Total runtime: 867.72s
+Total evaluations: 180, hypervolume: 36859.0000
+
+========== Iteration 8 ==========
+Surrogate model fitted: 0.22s
+Surrogate problem solved: 106.43s
+Next sample batch selected: 2.18s
+New samples evaluated: 0.63s
+Total runtime: 977.54s
+Total evaluations: 190, hypervolume: 36859.0000
+
+========== Iteration 9 ==========
+Surrogate model fitted: 0.24s
+Surrogate problem solved: 107.20s
+Next sample batch selected: 2.19s
+New samples evaluated: 0.66s
+Total runtime: 1088.18s
+Total evaluations: 200, hypervolume: 37249.0000
+
+========== Iteration 10 ==========
+Surrogate model fitted: 0.23s
+Surrogate problem solved: 105.76s
+Next sample batch selected: 2.26s
+New samples evaluated: 0.62s
+Total runtime: 1197.31s
+Total evaluations: 210, hypervolume: 37249.0000
+
+========== Iteration 11 ==========
+Surrogate model fitted: 0.30s
+Surrogate problem solved: 105.19s
+Next sample batch selected: 2.22s
+New samples evaluated: 0.62s
+Total runtime: 1306.01s
+Total evaluations: 220, hypervolume: 37249.0000
+
+========== Iteration 12 ==========
+Surrogate model fitted: 0.29s
+Surrogate problem solved: 105.31s
+Next sample batch selected: 2.21s
+New samples evaluated: 0.61s
+Total runtime: 1414.78s
+Total evaluations: 230, hypervolume: 37295.0000
+
+========== Iteration 13 ==========
+Surrogate model fitted: 0.27s
+Surrogate problem solved: 106.35s
+Next sample batch selected: 2.38s
+New samples evaluated: 0.64s
+Total runtime: 1524.66s
+Total evaluations: 240, hypervolume: 37347.0000
+
+========== Iteration 14 ==========
+Surrogate model fitted: 0.33s
+Surrogate problem solved: 105.67s
+Next sample batch selected: 2.34s
+New samples evaluated: 0.66s
+Total runtime: 1633.95s
+Total evaluations: 250, hypervolume: 37352.0000
+
+========== Iteration 15 ==========
+Surrogate model fitted: 0.34s
+Surrogate problem solved: 105.71s
+Next sample batch selected: 2.40s
+New samples evaluated: 0.67s
+Total runtime: 1743.45s
+Total evaluations: 260, hypervolume: 37418.0000
+
+========== Iteration 16 ==========
+Surrogate model fitted: 0.40s
+Surrogate problem solved: 107.13s
+Next sample batch selected: 2.41s
+New samples evaluated: 0.63s
+Total runtime: 1854.39s
+Total evaluations: 270, hypervolume: 37719.0000
+
+========== Iteration 17 ==========
+Surrogate model fitted: 0.42s
+Surrogate problem solved: 105.67s
+Next sample batch selected: 2.74s
+New samples evaluated: 0.67s
+Total runtime: 1964.18s
+Total evaluations: 280, hypervolume: 37719.0000
+
+========== Iteration 18 ==========
+Surrogate model fitted: 0.40s
+Surrogate problem solved: 106.60s
+Next sample batch selected: 2.68s
+New samples evaluated: 0.68s
+Total runtime: 2074.82s
+Total evaluations: 290, hypervolume: 37768.0000
+
+========== Iteration 19 ==========
+Surrogate model fitted: 0.42s
+Surrogate problem solved: 104.93s
+Next sample batch selected: 2.80s
+New samples evaluated: 0.65s
+Total runtime: 2184.00s
+Total evaluations: 300, hypervolume: 37771.0000
+
+========== Iteration 20 ==========
+Surrogate model fitted: 0.49s
+Surrogate problem solved: 106.58s
+Next sample batch selected: 2.81s
+New samples evaluated: 0.64s
+Total runtime: 2294.89s
+Total evaluations: 310, hypervolume: 37812.0000
+
+========== Iteration 21 ==========
+Surrogate model fitted: 0.53s
+Surrogate problem solved: 107.69s
+Next sample batch selected: 2.81s
+New samples evaluated: 0.62s
+Total runtime: 2406.92s
+Total evaluations: 320, hypervolume: 37874.0000
+
+========== Iteration 22 ==========
+Surrogate model fitted: 0.51s
+Surrogate problem solved: 105.34s
+Next sample batch selected: 2.97s
+New samples evaluated: 0.63s
+Total runtime: 2516.76s
+Total evaluations: 330, hypervolume: 37874.0000
+
+========== Iteration 23 ==========
+Surrogate model fitted: 0.57s
+Surrogate problem solved: 107.76s
+Next sample batch selected: 3.00s
+New samples evaluated: 0.63s
+Total runtime: 2629.03s
+Total evaluations: 340, hypervolume: 37874.0000
+
+========== Iteration 24 ==========
+Surrogate model fitted: 0.57s
+Surrogate problem solved: 107.19s
+Next sample batch selected: 3.00s
+New samples evaluated: 0.65s
+Total runtime: 2740.75s
+Total evaluations: 350, hypervolume: 37911.0000
+
+========== Iteration 25 ==========
+Surrogate model fitted: 0.61s
+Surrogate problem solved: 106.68s
+Next sample batch selected: 2.97s
+New samples evaluated: 0.64s
+Total runtime: 2852.04s
+Total evaluations: 360, hypervolume: 37929.0000
+
+========== Iteration 26 ==========
+Surrogate model fitted: 0.62s
+Surrogate problem solved: 107.98s
+Next sample batch selected: 3.25s
+New samples evaluated: 0.65s
+Total runtime: 2964.80s
+Total evaluations: 370, hypervolume: 37991.0000
+
+========== Iteration 27 ==========
+Surrogate model fitted: 0.68s
+Surrogate problem solved: 107.45s
+Next sample batch selected: 3.18s
+New samples evaluated: 0.65s
+Total runtime: 3077.04s
+Total evaluations: 380, hypervolume: 38002.0000
+
+========== Iteration 28 ==========
+Surrogate model fitted: 0.68s
+Surrogate problem solved: 107.17s
+Next sample batch selected: 3.06s
+New samples evaluated: 0.65s
+Total runtime: 3188.86s
+Total evaluations: 390, hypervolume: 38002.0000
+
+========== Iteration 29 ==========
+Surrogate model fitted: 0.75s
+Surrogate problem solved: 106.52s
+Next sample batch selected: 3.07s
+New samples evaluated: 0.64s
+Total runtime: 3300.11s
+Total evaluations: 400, hypervolume: 38021.0000
+
+*** Processing content list
+
+Start the optimizer
+========== Problem Definition ==========
+# name: CDN_RAM
+# n_var: 4
+# n_obj: 2
+# n_constr: 0
+
+========== Framework Description ==========
+# algorithm: TSEMO
+# surrogate: ThompsonSampling
+# acquisition: IdentityFunc
+# solver: NSGA2Solver
+# selection: HVI
+
+
+Compiled modules for significant speedup can not be used!
+https://pymoo.org/installation.html#installation
+
+To disable this warning:
+from pymoo.configuration import Configuration
+Configuration.show_compile_hint = False
+
+========== Iteration 0 ==========
+Surrogate model fitted: 0.86s
+Surrogate problem solved: 107.72s
+Next sample batch selected: 1.71s
+New samples evaluated: 0.61s
+Total runtime: 110.90s
+Total evaluations: 110, hypervolume: 32539.0000
+
+========== Iteration 1 ==========
+Surrogate model fitted: 1.03s
+Surrogate problem solved: 106.53s
+Next sample batch selected: 1.88s
+New samples evaluated: 0.58s
+Total runtime: 221.14s
+Total evaluations: 120, hypervolume: 32539.0000
+
+========== Iteration 2 ==========
+Surrogate model fitted: 1.03s
+Surrogate problem solved: 105.72s
+Next sample batch selected: 1.81s
+New samples evaluated: 0.59s
+Total runtime: 330.57s
+Total evaluations: 130, hypervolume: 32591.0000
+
+========== Iteration 3 ==========
+Surrogate model fitted: 1.76s
+Surrogate problem solved: 107.01s
+Next sample batch selected: 1.84s
+New samples evaluated: 0.63s
+Total runtime: 442.02s
+Total evaluations: 140, hypervolume: 32613.0000
+
+========== Iteration 4 ==========
+Surrogate model fitted: 1.72s
+Surrogate problem solved: 105.53s
+Next sample batch selected: 2.08s
+New samples evaluated: 0.62s
+Total runtime: 552.18s
+Total evaluations: 150, hypervolume: 32632.0000
+
+========== Iteration 5 ==========
+Surrogate model fitted: 1.72s
+Surrogate problem solved: 105.75s
+Next sample batch selected: 2.22s
+New samples evaluated: 0.60s
+Total runtime: 662.83s
+Total evaluations: 160, hypervolume: 32632.0000
+
+========== Iteration 6 ==========
+Surrogate model fitted: 1.22s
+Surrogate problem solved: 106.28s
+Next sample batch selected: 2.37s
+New samples evaluated: 0.63s
+Total runtime: 773.56s
+Total evaluations: 170, hypervolume: 32687.0000
+
+========== Iteration 7 ==========
+Surrogate model fitted: 2.19s
+Surrogate problem solved: 106.60s
+Next sample batch selected: 2.19s
+New samples evaluated: 0.61s
+Total runtime: 885.39s
+Total evaluations: 180, hypervolume: 32687.0000
+
+========== Iteration 8 ==========
+Surrogate model fitted: 2.87s
+Surrogate problem solved: 107.86s
+Next sample batch selected: 2.19s
+New samples evaluated: 0.60s
+Total runtime: 999.12s
+Total evaluations: 190, hypervolume: 32884.0000
+
+========== Iteration 9 ==========
+Surrogate model fitted: 1.73s
+Surrogate problem solved: 108.69s
+Next sample batch selected: 2.39s
+New samples evaluated: 0.63s
+Total runtime: 1112.78s
+Total evaluations: 200, hypervolume: 32916.0000
+
+========== Iteration 10 ==========
+Surrogate model fitted: 2.23s
+Surrogate problem solved: 105.74s
+Next sample batch selected: 2.39s
+New samples evaluated: 0.64s
+Total runtime: 1224.15s
+Total evaluations: 210, hypervolume: 33042.0000
+
+========== Iteration 11 ==========
+Surrogate model fitted: 3.58s
+Surrogate problem solved: 105.54s
+Next sample batch selected: 2.30s
+New samples evaluated: 0.65s
+Total runtime: 1336.51s
+Total evaluations: 220, hypervolume: 33385.0000
+
+========== Iteration 12 ==========
+Surrogate model fitted: 2.21s
+Surrogate problem solved: 106.44s
+Next sample batch selected: 2.46s
+New samples evaluated: 0.62s
+Total runtime: 1448.61s
+Total evaluations: 230, hypervolume: 33565.0000
+
+========== Iteration 13 ==========
+Surrogate model fitted: 0.86s
+Surrogate problem solved: 105.93s
+Next sample batch selected: 2.35s
+New samples evaluated: 0.63s
+Total runtime: 1558.73s
+Total evaluations: 240, hypervolume: 33784.0000
+
+========== Iteration 14 ==========
+Surrogate model fitted: 0.33s
+Surrogate problem solved: 106.12s
+Next sample batch selected: 2.28s
+New samples evaluated: 0.60s
+Total runtime: 1668.35s
+Total evaluations: 250, hypervolume: 33784.0000
+
+========== Iteration 15 ==========
+Surrogate model fitted: 0.36s
+Surrogate problem solved: 107.02s
+Next sample batch selected: 2.43s
+New samples evaluated: 0.62s
+Total runtime: 1779.16s
+Total evaluations: 260, hypervolume: 33954.0000
+
+========== Iteration 16 ==========
+Surrogate model fitted: 0.35s
+Surrogate problem solved: 107.84s
+Next sample batch selected: 2.52s
+New samples evaluated: 0.74s
+Total runtime: 1890.86s
+Total evaluations: 270, hypervolume: 33970.0000
+
+========== Iteration 17 ==========
+Surrogate model fitted: 0.40s
+Surrogate problem solved: 107.05s
+Next sample batch selected: 2.43s
+New samples evaluated: 0.61s
+Total runtime: 2001.76s
+Total evaluations: 280, hypervolume: 34026.0000
+
+========== Iteration 18 ==========
+Surrogate model fitted: 0.41s
+Runing 0 started
+Runing 1 started
+Runing 2 started
+Runing 3 started
+Runing 4 started
+Runing 5 started
+Runing 6 started
+Runing 7 started
+Runing 8 started
+Runing 9 started
+all experiments done, time: 8770.10s

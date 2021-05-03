@@ -1,0 +1,178 @@
+/usr/local/lib64/python3.6/site-packages/sklearn/gaussian_process/kernels.py:418: ConvergenceWarning: The optimal value found for dimension 0 of parameter k2__constant_value is close to the specified upper bound 100000.0. Increasing the bound and calling fit again may find a better value.
+  ConvergenceWarning)
+/usr/local/lib64/python3.6/site-packages/sklearn/gaussian_process/kernels.py:418: ConvergenceWarning: The optimal value found for dimension 0 of parameter k2__constant_value is close to the specified upper bound 100000.0. Increasing the bound and calling fit again may find a better value.
+  ConvergenceWarning)
+/usr/local/lib64/python3.6/site-packages/sklearn/gaussian_process/kernels.py:418: ConvergenceWarning: The optimal value found for dimension 0 of parameter k2__constant_value is close to the specified upper bound 100000.0. Increasing the bound and calling fit again may find a better value.
+  ConvergenceWarning)
+/usr/local/lib64/python3.6/site-packages/sklearn/gaussian_process/kernels.py:418: ConvergenceWarning: The optimal value found for dimension 0 of parameter k2__constant_value is close to the specified upper bound 100000.0. Increasing the bound and calling fit again may find a better value.
+  ConvergenceWarning)
+/usr/local/lib64/python3.6/site-packages/sklearn/gaussian_process/kernels.py:418: ConvergenceWarning: The optimal value found for dimension 0 of parameter k2__constant_value is close to the specified upper bound 100000.0. Increasing the bound and calling fit again may find a better value.
+  ConvergenceWarning)
+/usr/local/lib64/python3.6/site-packages/sklearn/gaussian_process/kernels.py:418: ConvergenceWarning: The optimal value found for dimension 0 of parameter k1__k1__constant_value is close to the specified upper bound 100000.0. Increasing the bound and calling fit again may find a better value.
+  ConvergenceWarning)
+/usr/local/lib64/python3.6/site-packages/sklearn/gaussian_process/kernels.py:418: ConvergenceWarning: The optimal value found for dimension 0 of parameter k2__constant_value is close to the specified upper bound 100000.0. Increasing the bound and calling fit again may find a better value.
+  ConvergenceWarning)
+/usr/local/lib64/python3.6/site-packages/sklearn/gaussian_process/kernels.py:418: ConvergenceWarning: The optimal value found for dimension 0 of parameter k2__constant_value is close to the specified upper bound 100000.0. Increasing the bound and calling fit again may find a better value.
+  ConvergenceWarning)
+/usr/local/lib64/python3.6/site-packages/sklearn/gaussian_process/kernels.py:418: ConvergenceWarning: The optimal value found for dimension 0 of parameter k2__constant_value is close to the specified upper bound 100000.0. Increasing the bound and calling fit again may find a better value.
+  ConvergenceWarning)
+/usr/local/lib64/python3.6/site-packages/sklearn/gaussian_process/kernels.py:418: ConvergenceWarning: The optimal value found for dimension 0 of parameter k2__constant_value is close to the specified upper bound 100000.0. Increasing the bound and calling fit again may find a better value.
+  ConvergenceWarning)
+/usr/local/lib64/python3.6/site-packages/sklearn/gaussian_process/kernels.py:418: ConvergenceWarning: The optimal value found for dimension 0 of parameter k1__k1__constant_value is close to the specified upper bound 100000.0. Increasing the bound and calling fit again may find a better value.
+  ConvergenceWarning)
+/usr/local/lib64/python3.6/site-packages/sklearn/gaussian_process/kernels.py:418: ConvergenceWarning: The optimal value found for dimension 0 of parameter k2__constant_value is close to the specified upper bound 100000.0. Increasing the bound and calling fit again may find a better value.
+  ConvergenceWarning)
+/usr/local/lib64/python3.6/site-packages/sklearn/gaussian_process/kernels.py:418: ConvergenceWarning: The optimal value found for dimension 0 of parameter k2__constant_value is close to the specified upper bound 100000.0. Increasing the bound and calling fit again may find a better value.
+  ConvergenceWarning)
+/usr/local/lib64/python3.6/site-packages/sklearn/gaussian_process/kernels.py:418: ConvergenceWarning: The optimal value found for dimension 0 of parameter k2__constant_value is close to the specified upper bound 100000.0. Increasing the bound and calling fit again may find a better value.
+  ConvergenceWarning)
+/usr/local/lib64/python3.6/site-packages/sklearn/gaussian_process/kernels.py:418: ConvergenceWarning: The optimal value found for dimension 0 of parameter k1__k1__constant_value is close to the specified upper bound 100000.0. Increasing the bound and calling fit again may find a better value.
+  ConvergenceWarning)
+/usr/local/lib64/python3.6/site-packages/sklearn/gaussian_process/kernels.py:418: ConvergenceWarning: The optimal value found for dimension 0 of parameter k2__constant_value is close to the specified upper bound 100000.0. Increasing the bound and calling fit again may find a better value.
+  ConvergenceWarning)
+/usr/local/lib64/python3.6/site-packages/sklearn/gaussian_process/kernels.py:418: ConvergenceWarning: The optimal value found for dimension 0 of parameter k1__k1__constant_value is close to the specified upper bound 100000.0. Increasing the bound and calling fit again may find a better value.
+  ConvergenceWarning)
+/usr/local/lib64/python3.6/site-packages/sklearn/gaussian_process/kernels.py:418: ConvergenceWarning: The optimal value found for dimension 0 of parameter k2__constant_value is close to the specified upper bound 100000.0. Increasing the bound and calling fit again may find a better value.
+  ConvergenceWarning)
+/usr/local/lib64/python3.6/site-packages/sklearn/gaussian_process/kernels.py:418: ConvergenceWarning: The optimal value found for dimension 0 of parameter k1__k1__constant_value is close to the specified upper bound 100000.0. Increasing the bound and calling fit again may find a better value.
+  ConvergenceWarning)
+/usr/local/lib64/python3.6/site-packages/sklearn/gaussian_process/kernels.py:418: ConvergenceWarning: The optimal value found for dimension 0 of parameter k2__constant_value is close to the specified upper bound 100000.0. Increasing the bound and calling fit again may find a better value.
+  ConvergenceWarning)
+/usr/local/lib64/python3.6/site-packages/sklearn/gaussian_process/kernels.py:418: ConvergenceWarning: The optimal value found for dimension 0 of parameter k1__k1__constant_value is close to the specified upper bound 100000.0. Increasing the bound and calling fit again may find a better value.
+  ConvergenceWarning)
+/usr/local/lib64/python3.6/site-packages/sklearn/gaussian_process/kernels.py:418: ConvergenceWarning: The optimal value found for dimension 0 of parameter k2__constant_value is close to the specified upper bound 100000.0. Increasing the bound and calling fit again may find a better value.
+  ConvergenceWarning)
+/usr/local/lib64/python3.6/site-packages/sklearn/gaussian_process/kernels.py:418: ConvergenceWarning: The optimal value found for dimension 0 of parameter k2__constant_value is close to the specified upper bound 100000.0. Increasing the bound and calling fit again may find a better value.
+  ConvergenceWarning)
+/usr/local/lib64/python3.6/site-packages/sklearn/gaussian_process/kernels.py:418: ConvergenceWarning: The optimal value found for dimension 0 of parameter k1__k1__constant_value is close to the specified upper bound 100000.0. Increasing the bound and calling fit again may find a better value.
+  ConvergenceWarning)
+/usr/local/lib64/python3.6/site-packages/sklearn/gaussian_process/kernels.py:418: ConvergenceWarning: The optimal value found for dimension 0 of parameter k2__constant_value is close to the specified upper bound 100000.0. Increasing the bound and calling fit again may find a better value.
+  ConvergenceWarning)
+/usr/local/lib64/python3.6/site-packages/sklearn/gaussian_process/kernels.py:418: ConvergenceWarning: The optimal value found for dimension 0 of parameter k1__k1__constant_value is close to the specified upper bound 100000.0. Increasing the bound and calling fit again may find a better value.
+  ConvergenceWarning)
+/usr/local/lib64/python3.6/site-packages/sklearn/gaussian_process/kernels.py:418: ConvergenceWarning: The optimal value found for dimension 0 of parameter k1__k1__constant_value is close to the specified upper bound 100000.0. Increasing the bound and calling fit again may find a better value.
+  ConvergenceWarning)
+/usr/local/lib64/python3.6/site-packages/sklearn/gaussian_process/kernels.py:418: ConvergenceWarning: The optimal value found for dimension 0 of parameter k1__k1__constant_value is close to the specified upper bound 100000.0. Increasing the bound and calling fit again may find a better value.
+  ConvergenceWarning)
+/usr/local/lib64/python3.6/site-packages/sklearn/gaussian_process/kernels.py:418: ConvergenceWarning: The optimal value found for dimension 0 of parameter k1__k1__constant_value is close to the specified upper bound 100000.0. Increasing the bound and calling fit again may find a better value.
+  ConvergenceWarning)
+/usr/local/lib64/python3.6/site-packages/sklearn/gaussian_process/kernels.py:418: ConvergenceWarning: The optimal value found for dimension 0 of parameter k1__k1__constant_value is close to the specified upper bound 100000.0. Increasing the bound and calling fit again may find a better value.
+  ConvergenceWarning)
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/usr/lib64/python3.6/multiprocessing/pool.py", line 119, in worker
+    result = (True, func(*args, **kwds))
+  File "/usr/lib64/python3.6/multiprocessing/pool.py", line 44, in mapstar
+    return list(map(*args))
+  File "/home/loclh/cdn_configuration_optimization/DGEMO/problems/cdn.py", line 81, in process_compute_perforamnce
+    topo.reconfig(cacheSizeFactorList, idx)
+  File "/home/loclh/cdn_configuration_optimization/src/net/topology.py", line 46, in reconfig
+    self.warmUp()
+  File "/home/loclh/cdn_configuration_optimization/src/net/topology.py", line 55, in warmUp
+    warmUpReqDict = pickle.load(f)
+_pickle.UnpicklingError: pickle data was truncated
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "bayesian_optimization.py", line 95, in <module>
+    main()
+  File "bayesian_optimization.py", line 83, in main
+    X_next, Y_next, _ = next(solution)
+  File "/home/loclh/cdn_configuration_optimization/DGEMO/mobo/mobo.py", line 117, in solve
+    timer.log('Surrogate problem solved')
+  File "/home/loclh/cdn_configuration_optimization/DGEMO/mobo/solver/solver.py", line 46, in solve
+    res = minimize(problem, algo, ('n_gen', self.n_gen))
+  File "/usr/local/lib/python3.6/site-packages/pymoo/optimize.py", line 85, in minimize
+    res = algorithm.solve()
+  File "/usr/local/lib/python3.6/site-packages/pymoo/model/algorithm.py", line 226, in solve
+    self._solve(self.problem)
+  File "/usr/local/lib/python3.6/site-packages/pymoo/model/algorithm.py", line 321, in _solve
+    self.next()
+  File "/usr/local/lib/python3.6/site-packages/pymoo/model/algorithm.py", line 246, in next
+    self._next()
+  File "/usr/local/lib/python3.6/site-packages/pymoo/algorithms/genetic_algorithm.py", line 107, in _next
+    self.evaluator.eval(self.problem, self.off, algorithm=self)
+  File "/usr/local/lib/python3.6/site-packages/pymoo/model/evaluator.py", line 78, in eval
+    self._eval(problem, pop[I], **kwargs)
+  File "/usr/local/lib/python3.6/site-packages/pymoo/model/evaluator.py", line 97, in _eval
+    **kwargs)
+  File "/home/loclh/cdn_configuration_optimization/DGEMO/mobo/surrogate_problem.py", line 36, in evaluate
+    return super().evaluate(*args, return_values_of=return_values_of, calc_hessian=calc_hessian, **kwargs)
+  File "/home/loclh/cdn_configuration_optimization/DGEMO/problems/problem.py", line 92, in evaluate
+    out = self._evaluate_batch(X, calc_gradient, out, *args, return_values_of=return_values_of, parallel=parallel, **kwargs)
+  File "/home/loclh/cdn_configuration_optimization/DGEMO/problems/problem.py", line 147, in _evaluate_batch
+    self._evaluate(X, out, *args, calc_gradient=calc_gradient, **kwargs)
+  File "/home/loclh/cdn_configuration_optimization/DGEMO/mobo/surrogate_problem.py", line 50, in _evaluate
+    out['G'], out['CV'], out['feasible'] = self.real_problem.evaluate(x_ori, parallel=parallel, return_values_of=['G', 'CV', 'feasible'], requires_F=False)
+  File "/home/loclh/cdn_configuration_optimization/DGEMO/problems/problem.py", line 92, in evaluate
+    out = self._evaluate_batch(X, calc_gradient, out, *args, return_values_of=return_values_of, parallel=parallel, **kwargs)
+  File "/home/loclh/cdn_configuration_optimization/DGEMO/problems/problem.py", line 147, in _evaluate_batch
+    self._evaluate(X, out, *args, calc_gradient=calc_gradient, **kwargs)
+  File "/home/loclh/cdn_configuration_optimization/DGEMO/problems/cdn.py", line 25, in _evaluate
+    performance = 1.0 * self.performance_function_parallel(x)
+  File "/home/loclh/cdn_configuration_optimization/DGEMO/problems/cdn.py", line 72, in performance_function_parallel
+    results = pool.map(self.process_compute_perforamnce, randomIdxList)
+  File "/usr/lib64/python3.6/multiprocessing/pool.py", line 266, in map
+    return self._map_async(func, iterable, mapstar, chunksize).get()
+  File "/usr/lib64/python3.6/multiprocessing/pool.py", line 644, in get
+    raise self._value
+_pickle.UnpicklingError: pickle data was truncated
+Traceback (most recent call last):
+  File "bayesian_optimization.py", line 95, in <module>
+    main()
+  File "bayesian_optimization.py", line 35, in main
+    config = loadJSON(jsonFile)
+  File "/home/loclh/cdn_configuration_optimization/src/util/utils.py", line 12, in loadJSON
+    with open(jsonFile) as config:
+FileNotFoundError: [Errno 2] No such file or directory: '/home/picarib/Desktop/cdn_configuration_optimization/config/json/sbd_custom.json'
+Traceback (most recent call last):
+  File "bayesian_optimization.py", line 95, in <module>
+    main()
+  File "bayesian_optimization.py", line 35, in main
+    config = loadJSON(jsonFile)
+  File "/home/loclh/cdn_configuration_optimization/src/util/utils.py", line 12, in loadJSON
+    with open(jsonFile) as config:
+FileNotFoundError: [Errno 2] No such file or directory: '/home/picarib/Desktop/cdn_configuration_optimization/config/json/sbd_custom.json'
+Traceback (most recent call last):
+  File "bayesian_optimization.py", line 95, in <module>
+    main()
+  File "bayesian_optimization.py", line 35, in main
+    config = loadJSON(jsonFile)
+  File "/home/loclh/cdn_configuration_optimization/src/util/utils.py", line 12, in loadJSON
+    with open(jsonFile) as config:
+FileNotFoundError: [Errno 2] No such file or directory: '/home/picarib/Desktop/cdn_configuration_optimization/config/json/sbd_custom.json'
+Traceback (most recent call last):
+  File "bayesian_optimization.py", line 95, in <module>
+    main()
+  File "bayesian_optimization.py", line 35, in main
+    config = loadJSON(jsonFile)
+  File "/home/loclh/cdn_configuration_optimization/src/util/utils.py", line 12, in loadJSON
+    with open(jsonFile) as config:
+FileNotFoundError: [Errno 2] No such file or directory: '/home/picarib/Desktop/cdn_configuration_optimization/config/json/sbd_custom.json'
+Traceback (most recent call last):
+  File "bayesian_optimization.py", line 95, in <module>
+    main()
+  File "bayesian_optimization.py", line 35, in main
+    config = loadJSON(jsonFile)
+  File "/home/loclh/cdn_configuration_optimization/src/util/utils.py", line 12, in loadJSON
+    with open(jsonFile) as config:
+FileNotFoundError: [Errno 2] No such file or directory: '/home/picarib/Desktop/cdn_configuration_optimization/config/json/sbd_custom.json'
+Traceback (most recent call last):
+  File "bayesian_optimization.py", line 95, in <module>
+    main()
+  File "bayesian_optimization.py", line 35, in main
+    config = loadJSON(jsonFile)
+  File "/home/loclh/cdn_configuration_optimization/src/util/utils.py", line 12, in loadJSON
+    with open(jsonFile) as config:
+FileNotFoundError: [Errno 2] No such file or directory: '/home/picarib/Desktop/cdn_configuration_optimization/config/json/sbd_custom.json'
+Traceback (most recent call last):
+  File "bayesian_optimization.py", line 95, in <module>
+    main()
+  File "bayesian_optimization.py", line 35, in main
+    config = loadJSON(jsonFile)
+  File "/home/loclh/cdn_configuration_optimization/src/util/utils.py", line 12, in loadJSON
+    with open(jsonFile) as config:
+FileNotFoundError: [Errno 2] No such file or directory: '/home/picarib/Desktop/cdn_configuration_optimization/config/json/sbd_custom.json'

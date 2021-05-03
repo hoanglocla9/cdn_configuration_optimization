@@ -28,10 +28,10 @@ import matplotlib.pyplot as pl
 
 
 def main():
-    jsonFile = "/home/picarib/Desktop/cdn_configuration_optimization/config/json/sbd_custom.json"
-    configDirPath = "/home/picarib/Desktop/cdn_configuration_optimization/config/sbd_custom/"
-    dataPath = "/home/picarib/Desktop/cdn_configuration_optimization/data/"
-    
+    jsonFile = "/home/loclh/cdn_configuration_optimization/config/json/sbd_custom.json"
+    configDirPath = "/home/loclh/cdn_configuration_optimization/config/sbd_custom/"
+    dataPath = "/home/loclh/cdn_configuration_optimization/data/"
+    deleteCachePath = "/home/loclh/cdn_configuration_optimization/tmp/"    
     config = loadJSON(jsonFile)
     interval = 1 if "custom" not in config["RequestModels"] else config["RequestModels"]["custom"]["interval"]
     isLoadRTable = config["isLoadRTable"]
@@ -55,7 +55,7 @@ def main():
     np.random.seed(args.seed)
 
     # build problem, get initial samples
-    extra_params = (topo, fileSize, mode, colorList, runReqNums, warmUpReqNums, separatorRankIncrement)
+    extra_params = (topo, fileSize, mode, colorList, runReqNums, warmUpReqNums, separatorRankIncrement, deleteCachePath)
     problem, X_init, Y_init = build_problem(args.problem, args.n_var, args.n_obj, args.n_init_sample, args.n_process, extra_params=extra_params)
     
     args.n_var, args.n_obj = problem.n_var, problem.n_obj
