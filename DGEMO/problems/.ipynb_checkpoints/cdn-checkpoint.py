@@ -27,7 +27,7 @@ class CDN_Topology(CDN):
             performance = 1.0 * self.performance_function(x)
         cost = self.cost_function(x_temp)
         del x, x_temp
-        out["F"] = np.column_stack([performance, cost/1024])
+        out["F"] = np.column_stack([performance, cost])
         if self.deleteCachePath:
             for f in os.listdir("./tmp/"):
                 if re.search("save_*", f):
@@ -81,7 +81,6 @@ class CDN_Topology(CDN):
         topo.reconfigTopology(vectorList, idx)
         routingTable = {}
         traffic = runSimulationWithPredefinedDistribution(fileSize, mode, routingTable, topo, colorList, runReqNums, warmUpReqNums, separatorRankIncrement, self.generateData, idx)
-
        
         del data, fileSize, mode, topo, colorList, runReqNums, warmUpReqNums, separatorRankIncrement, vectorList
         return int(traffic)
@@ -118,7 +117,7 @@ class CDN_RAM(CDN):
             performance = 1.0 * self.performance_function(x)
         cost = self.cost_function(x_temp)
         del x, x_temp
-        out["F"] = np.column_stack([performance, cost/1024])
+        out["F"] = np.column_stack([performance, cost])
 #         out["G"] = int(self.min_cost * (80*1024-10*1024) + 10 *1024) - cost
         if self.deleteCachePath:
             for f in os.listdir("./tmp/"):
@@ -199,7 +198,7 @@ class CDN_RAM(CDN):
         for i in range(len(cacheSizeFactorList)):
             temp = [0] * (len(cacheSizeFactorList[i]))
             for j in range(len(cacheSizeFactorList[i])):
-                temp[j] = int(cacheSizeFactorList[i][j] * 1024) # (800*1024-100*1024) + 100*1024
+                temp[j] = int(cacheSizeFactorList[i][j]) # (800*1024-100*1024) + 100*1024
             result.append(int(sum(temp)))
         
         return np.array(result)
