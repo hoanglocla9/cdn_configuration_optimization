@@ -51,8 +51,8 @@ def generate_initial_samples(problem, n_sample, useInteger=False):
     while len(X_feasible) < n_sample:
         X = lhs(problem.n_var, n_sample)
         X = problem.xl + X * (problem.xu - problem.xl)
-#        if useInteger:
-        X = np.round(X)
+        if useInteger:
+            X = np.round(X)
         X_temp = X.copy()
         Y, feasible = problem.evaluate(X, return_values_of=['F', 'feasible'])
         feasible = feasible.flatten()

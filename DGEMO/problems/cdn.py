@@ -19,13 +19,13 @@ class CDN_RAM(CDN):
         raise "Not implement yet"
 
     def _evaluate(self, x, out,  *args, **kwargs):
-        x_temp = x.copy()
+        x_temp = np.round(x.copy())
         self.count_step += len(x_temp)
 
         if self.n_process > 1:
-            performance = 1.0 * self.performance_function_parallel(x)
+            performance = 1.0 * self.performance_function_parallel(x_temp)
         else:
-            performance = 1.0 * self.performance_function(x)
+            performance = 1.0 * self.performance_function(x_temp)
         cost = self.cost_function(x_temp)
         del x, x_temp
         out["F"] = np.column_stack([performance, cost])
