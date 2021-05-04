@@ -125,7 +125,7 @@ class MOBO:
 #                 X_temp = X_next.copy()
             # update dataset
             
-            Y_next = self.real_problem.evaluate(X_temp, return_values_of="F")
+            Y_next = self.real_problem.evaluate(X_next, return_values_of="F")
             self._update_status(X_next, Y_next)
             timer.log('New samples evaluated')
 
