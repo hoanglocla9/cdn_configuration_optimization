@@ -92,11 +92,13 @@ def build_problem(name, n_var, n_obj, n_init_sample, n_process=1, extra_params=N
         else:
             pareto_front = None
     else:
-        problem = get_problem(name, n_var=n_var, n_obj=n_obj)
+        
         if name == "cdn_ram":
+            problem = get_problem(name, n_var=n_var, n_obj=n_obj, transformToInteger = not useInteger)
             topo, fileSize, mode, colorList, runReqNums, warmUpReqNums, separatorRankIncrement, deleteCachePath = extra_params
             problem.get_parameters(topo, fileSize, mode, colorList, runReqNums, warmUpReqNums, separatorRankIncrement, n_process, deleteCachePath)
-            
+        else:
+            problem = get_problem(name, n_var=n_var, n_obj=n_obj)
             
     # get initial samples
     X_init, Y_init = generate_initial_samples(problem, n_init_sample, useInteger)
