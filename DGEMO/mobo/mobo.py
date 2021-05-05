@@ -31,10 +31,10 @@ class MOBO:
         ### disable interger-based kernel
         
         bounds = np.array([problem.xl, problem.xu])
-        if not self.useInteger:
-            self.transformation = StandardTransform(bounds) # data normalization for surrogate model fitting
-        else:
-            self.transformation = None
+#         if not self.useInteger:
+#             self.transformation = StandardTransform(bounds) # data normalization for surrogate model fitting
+#         else:
+        self.transformation = None
         # framework components
         framework_args['surrogate']['n_var'] = self.n_var # for surrogate fitting
         framework_args['surrogate']['n_obj'] = self.n_obj # for surroagte fitting
@@ -95,13 +95,14 @@ class MOBO:
             timer = Timer()
 
             # data normalization
-            if not self.useInteger:
-                self.transformation.fit(self.X, self.Y)
-                X, Y = self.transformation.do(self.X, self.Y)
-            else:
-                X, Y = self.X, self.Y
+#             if not self.useInteger:
+#                 self.transformation.fit(self.X, self.Y)
+#                 X, Y = self.transformation.do(self.X, self.Y)
+#             else:
+            X, Y = self.X, self.Y
             # build surrogate models
             self.surrogate_model.fit(X, Y)
+            
             timer.log('Surrogate model fitted')
 
             # define acquisition functions
@@ -109,10 +110,10 @@ class MOBO:
             
             # solve surrogate problem
             surr_problem = SurrogateProblem(self.real_problem, self.surrogate_model, self.acquisition, self.transformation)
-            if self.useInteger:
-                bound = [surr_problem.xl, surr_problem.xu]
-            else:
-                bound = None
+#             if self.useInteger:
+            bound = [surr_problem.xl, surr_problem.xu]
+#             else:
+#                 bound = None
             solution = self.solver.solve(surr_problem, X, Y, self.useInteger, bound)
             timer.log('Surrogate problem solved')
             # batch point selection
