@@ -28,10 +28,10 @@ import matplotlib.pyplot as pl
 
 
 def main():
-    jsonFile = "/home/loclh/cdn_configuration_optimization/config/json/sbd_custom.json"
-    configDirPath = "/home/loclh/cdn_configuration_optimization/config/sbd_custom/"
-    dataPath = "/home/loclh/cdn_configuration_optimization/data/"
-    deleteCachePath = "/home/loclh/cdn_configuration_optimization/tmp/"    
+    jsonFile = "/home/picarib_home/cdn_configuration_optimization/config/json/france_cdn.json"
+    configDirPath = "/home/picarib_home/cdn_configuration_optimization/config/france_cdn/"
+    dataPath = "/home/picarib_home/cdn_configuration_optimization/data/"
+    deleteCachePath = "/home/picarib_home/cdn_configuration_optimization/tmp/"    
     config = loadJSON(jsonFile)
     interval = 1 if "custom" not in config["RequestModels"] else config["RequestModels"]["custom"]["interval"]
     isLoadRTable = config["isLoadRTable"]
@@ -56,7 +56,7 @@ def main():
 
     # build problem, get initial samples
     extra_params = (topo, fileSize, mode, colorList, runReqNums, warmUpReqNums, separatorRankIncrement, deleteCachePath)
-    problem, X_init, Y_init = build_problem(args.problem, args.n_var, args.n_obj, args.n_init_sample, args.n_process, extra_params=extra_params)
+    problem, X_init, Y_init = build_problem(args.problem, args.n_var, args.n_obj, args.n_init_sample, args.n_process, useInteger=framework_args['surrogate']['useInteger'], extra_params=extra_params)
     
     args.n_var, args.n_obj = problem.n_var, problem.n_obj
     print("Start the optimizer")

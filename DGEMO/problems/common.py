@@ -63,7 +63,7 @@ def generate_initial_samples(problem, n_sample, useInteger=False):
     return X, Y
 
 
-def build_problem(name, n_var, n_obj, n_init_sample, n_process=1, extra_params=None, useInteger=False):
+def build_problem(name, n_var, n_obj, n_init_sample, n_process=1, extra_params=None, useInteger=True):
     '''
     Build optimization problem from name, get initial samples
     Input:
