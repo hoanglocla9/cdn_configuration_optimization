@@ -28,10 +28,10 @@ import matplotlib.pyplot as pl
 
 
 def main():
-    jsonFile = "/home/picarib/Desktop/cdn_configuration_optimization/config/json/france_cdn.json"
-    configDirPath = "/home/picarib/Desktop/cdn_configuration_optimization/config/france_cdn/"
-    dataPath = "/home/picarib/Desktop/cdn_configuration_optimization/data/"
-    deleteCachePath = "/home/picarib/Desktop/cdn_configuration_optimization/tmp/"    
+    jsonFile = "/home/loclh/cdn_configuration_optimization/config/json/france_cdn.json"
+    configDirPath = "/home/loclh/cdn_configuration_optimization/config/france_cdn/"
+    dataPath = "/home/loclh/cdn_configuration_optimization/data/"
+    deleteCachePath = "/home/loclh/cdn_configuration_optimization/tmp/france_cdn"    
     config = loadJSON(jsonFile)
     interval = 1 if "custom" not in config["RequestModels"] else config["RequestModels"]["custom"]["interval"]
     isLoadRTable = config["isLoadRTable"]
