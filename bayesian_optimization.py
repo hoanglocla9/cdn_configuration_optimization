@@ -1,11 +1,11 @@
 import os
 os.environ['OMP_NUM_THREADS'] = '1' # speed up
 import numpy as np
-from DGEMO.problems.common import build_problem
-from DGEMO.mobo.algorithms import get_algorithm
-from DGEMO.visualization.data_export import DataExport
-from DGEMO.arguments import get_args
-from DGEMO.utils import save_args, setup_logger
+from MMO.problems.common import build_problem
+from MMO.mobo.algorithms import get_algorithm
+from MMO.visualization.data_export import DataExport
+from MMO.arguments import get_args
+from MMO.utils import save_args, setup_logger
 import networkx as nx
 import random, pickle, string
 from src.util.gen_files import *
@@ -28,10 +28,10 @@ import matplotlib.pyplot as pl
 
 
 def main():
-    jsonFile = "/home/picarib_home/cdn_configuration_optimization/config/json/france_cdn.json"
-    configDirPath = "/home/picarib_home/cdn_configuration_optimization/config/france_cdn/"
-    dataPath = "/home/picarib_home/cdn_configuration_optimization/data/"
-    deleteCachePath = "/home/picarib_home/cdn_configuration_optimization/tmp/"    
+    jsonFile = "/home/picarib/Desktop/cdn_configuration_optimization/config/json/france_cdn.json"
+    configDirPath = "/home/picarib/Desktop/cdn_configuration_optimization/config/france_cdn/"
+    dataPath = "/home/picarib/Desktop/cdn_configuration_optimization/data/"
+    deleteCachePath = "/home/picarib/Desktop/cdn_configuration_optimization/tmp/"    
     config = loadJSON(jsonFile)
     interval = 1 if "custom" not in config["RequestModels"] else config["RequestModels"]["custom"]["interval"]
     isLoadRTable = config["isLoadRTable"]
@@ -56,7 +56,8 @@ def main():
 
     # build problem, get initial samples
     extra_params = (topo, fileSize, mode, colorList, runReqNums, warmUpReqNums, separatorRankIncrement, deleteCachePath)
-    problem, X_init, Y_init = build_problem(args.problem, args.n_var, args.n_obj, args.n_init_sample, args.n_process, useInteger=framework_args['surrogate']['useInteger'], extra_params=extra_params)
+    
+    problem, X_init, Y_init = build_problem(args.problem, args.n_var, args.n_obj, args.n_init_sample, args.n_process, mode=int(framework_args['surrogate']['mode']), extra_params=extra_params)
     
     args.n_var, args.n_obj = problem.n_var, problem.n_obj
     print("Start the optimizer")
