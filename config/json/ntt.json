@@ -1,16 +1,16 @@
 {
     "NetworkId": "ntt_topology",
     "RequestModels": {
-        "gamma": {"K": 0.475, "Theta": 170.6067, "contentNums": 1000}
+        "gamma": {"K": 0.475, "Theta": 170.6067, "contentNums": 100}
     },
-    "RoutingMode": "full-color",
+    "RoutingMode": "no-color",
     "isLoadRTable": true,
     "isLoadSeparatorRank": false,
     "separatorRankIncrement": 3,
     "samplingMethod": null,
     "FileSize": 1024,
-    "RunReqNums": 100,
-    "WarmUpReqNums": 1000,
+    "RunReqNums": 500,
+    "WarmUpReqNums": 500,
     "colorNums": 4,
     "outputDir": "output/",
     "Routers": [
