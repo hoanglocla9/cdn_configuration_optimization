@@ -156,7 +156,7 @@ class GaussianProcess(SurrogateModel):
             gp = GaussianProcessRegressor(kernel=kernel, optimizer=constrained_optimization)
             self.gps.append(gp)
             
-    def fit(self, X, Y):
+    def fit(self, X, Y, bound=None, mode=None):
         for i, gp in enumerate(self.gps):
             gp.fit(X, Y[:, i])
             
