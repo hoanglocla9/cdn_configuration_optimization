@@ -142,12 +142,15 @@ def runVirtualSendFileShortestPath(graph, cacheDict, client, contentId, fileSize
         return {}, traffic
     
     if mode== "no-color":
-        if cacheDict[nextCacheId].get(contentId) != -1:
-            result[nextCacheId]["hit"] = 1 
-            return result, traffic
+        if cacheDict[nextCacheId] is None:
+            pass
         else:
-            cacheDict[nextCacheId].set(contentId, fileSize)
-            result[nextCacheId]["miss"] = 1
+            if cacheDict[nextCacheId].get(contentId) != -1:
+                result[nextCacheId]["hit"] = 1 
+                return result, traffic
+            else:
+                cacheDict[nextCacheId].set(contentId, fileSize)
+                result[nextCacheId]["miss"] = 1
             
         while True:
             routerId = findShortestCacheServer(graph, nextCacheId, "mainServer", routingTable)
@@ -156,20 +159,26 @@ def runVirtualSendFileShortestPath(graph, cacheDict, client, contentId, fileSize
             if routerId == "mainServer":
                 return result, traffic
             else:
-                if cacheDict[routerId].get(contentId) == -1:
-                    result[routerId]["miss"] = 1 
-                    cacheDict[routerId].set(contentId, fileSize)
+                if cacheDict[routerId] is None:
+                    pass
                 else:
-                    result[routerId]["hit"] = 1
-                    return result, traffic
+                    if cacheDict[routerId].get(contentId) == -1:
+                        result[routerId]["miss"] = 1 
+                        cacheDict[routerId].set(contentId, fileSize)
+                    else:
+                        result[routerId]["hit"] = 1
+                        return result, traffic
             nextCacheId = routerId
     else: ## mode == "tag-color"
-        if cacheDict[nextCacheId].get(contentId, contentColor) != -1:
-            result[nextCacheId]["hit"] = 1 
-            return result, traffic
+        if cacheDict[nextCacheId] is None:
+            pass
         else:
-            cacheDict[nextCacheId].set(contentId, contentColor, fileSize)
-            result[nextCacheId]["miss"] = 1
+            if cacheDict[nextCacheId].get(contentId, contentColor) != -1:
+                result[nextCacheId]["hit"] = 1 
+                return result, traffic
+            else:
+                cacheDict[nextCacheId].set(contentId, contentColor, fileSize)
+                result[nextCacheId]["miss"] = 1
             
         while True:
             routerId = findShortestCacheServer(graph, nextCacheId, "mainServer", routingTable)
@@ -178,12 +187,15 @@ def runVirtualSendFileShortestPath(graph, cacheDict, client, contentId, fileSize
             if routerId == "mainServer":
                 return result, traffic
             else:
-                if cacheDict[routerId].get(contentId, contentColor) == -1:
-                    result[routerId]["miss"] = 1 
-                    cacheDict[routerId].set(contentId, contentColor, fileSize)
+                if cacheDict[routerId] is None:
+                    pass
                 else:
-                    result[routerId]["hit"] = 1
-                    return result, traffic
+                    if cacheDict[routerId].get(contentId, contentColor) == -1:
+                        result[routerId]["miss"] = 1 
+                        cacheDict[routerId].set(contentId, contentColor, fileSize)
+                    else:
+                        result[routerId]["hit"] = 1
+                        return result, traffic
             nextCacheId = routerId
     
 def runWithShortestPath(graph, cacheDict, fileSize, mode, routingTable, runReqDict, clientList, interval, contentToColorDict=None):
@@ -244,7 +256,10 @@ def runSimulationWithRealDataset(interval, fileSize, mode, routingTable, topo, c
     custom_data = topo.contentGenerator.custom_data
     clientIds = topo.clientIds
     contentGenerator = topo.contentGenerator
-    cacheCapacity = cacheDict[list(cacheDict.keys())[0]].maxSize
+    if cacheDict[list(cacheDict.keys())[0]] is not None: 
+        cacheCapacity = cacheDict[list(cacheDict.keys())[0]].maxSize
+    else:
+        cacheCapacity = 0
     traffic = 0
     hit, hit1, miss = 0,0,0
     result = {}
@@ -282,7 +297,10 @@ def runSimulationWithPredefinedDistribution(fileSize, mode, routingTable, topo, 
     clientIds = topo.clientIds
     
     contentGenerator = topo.contentGenerator
-    cacheCapacity = cacheDict[list(cacheDict.keys())[0]].maxSize
+    if cacheDict[list(cacheDict.keys())[0]] is not None: 
+        cacheCapacity = cacheDict[list(cacheDict.keys())[0]].maxSize
+    else:
+        cacheCapacity = 0
     traffic = 0
     hit, hit1, miss = 0,0,0
     
