@@ -13,11 +13,11 @@ from pymoo.factory import get_performance_indicator
 from pymoo.util.nds.non_dominated_sorting import NonDominatedSorting
 from pymoo.operators.sampling.random_sampling import FloatRandomSampling
 from pymoo.operators.sampling.latin_hypercube_sampling import LatinHypercubeSampling
-from DGEMO.problems.common import build_problem
-from DGEMO.external import lhs
-from DGEMO.baselines.data_export import DataExport
-from DGEMO.mobo.utils import calc_hypervolume
-from DGEMO.utils import get_result_dir, setup_logger
+from MMO.problems.common import build_problem
+from MMO.external import lhs
+from MMO.baselines.data_export import DataExport
+from MMO.mobo.utils import calc_hypervolume
+from MMO.utils import get_result_dir, setup_logger
 from src.util.utils import *
 import random, string
 from src.net.topology import NetTopology
@@ -29,13 +29,13 @@ def get_args():
 
     parser.add_argument('--problem', type=str, default='cdn_ram', 
         help='optimization problem')
-    parser.add_argument('--n-var', type=int, default=4, 
+    parser.add_argument('--n-var', type=int, default=13, 
         help='number of design variables')
     parser.add_argument('--n-obj', type=int, default=2, 
         help='number of objectives')
-    parser.add_argument('--n-init-sample', type=int, default=50, 
+    parser.add_argument('--n-init-sample', type=int, default=100, 
         help='number of initial design samples')
-    parser.add_argument('--n-iter', type=int, default=20, 
+    parser.add_argument('--n-iter', type=int, default=30, 
         help='number of optimization iterations')
     parser.add_argument('--ref-point', type=float, nargs='+', default=None, 
         help='reference point for calculating hypervolume')
@@ -62,10 +62,11 @@ def get_args():
 def get_ref_point(problem, n_var=6, n_obj=2, n_init_sample=50, seed=0, n_process=cpu_count()):
 
     np.random.seed(seed)
-    jsonFile = "/home/picarib/Desktop/cdnet/config/json/sbd_custom.json"
-    configDirPath = "/home/picarib/Desktop/cdnet/config/sbd_custom/"
-    dataPath = "/home/picarib/Desktop/cdnet/data/"
+    jsonFile = "/home/picarib_home/cdnet/config/json/france_cdn.json"
+    configDirPath = "/home/picarib_home/cdnet/config/france_cdn/"
+    dataPath = "/home/picarib_home/cdnet/data/"
     
+    deleteCachePath = "/home/picarib_home/cdn_configuration_optimization/tmp/france_cdn"  
     config = loadJSON(jsonFile)
     interval = 1 if "custom" not in config["RequestModels"] else config["RequestModels"]["custom"]["interval"]
     isLoadRTable = config["isLoadRTable"]
@@ -82,7 +83,7 @@ def get_ref_point(problem, n_var=6, n_obj=2, n_init_sample=50, seed=0, n_process
     topo = NetTopology(config, configDirPath, mode, warmUpReqNums, fileSize, colorList)
     topo.build()
     
-    extra_params = (topo, fileSize, mode, colorList, runReqNums, warmUpReqNums, separatorRankIncrement)
+    extra_params = (topo, fileSize, mode, colorList, runReqNums, warmUpReqNums, separatorRankIncrement, deleteCachePath)
     _, _, Y_init = build_problem(problem, n_var, n_obj, n_init_sample, n_process, extra_params=extra_params)
 
     return np.max(Y_init, axis=0)
@@ -112,9 +113,10 @@ def main():
     np.random.seed(args.seed)
 
     # build problem, get initial samples
-    jsonFile = "/home/picarib/Desktop/cdnet/config/json/sbd_custom.json"
-    configDirPath = "/home/picarib/Desktop/cdnet/config/sbd_custom/"
-    dataPath = "/home/picarib/Desktop/cdnet/data/"
+    jsonFile = "/home/picarib_home/cdnet/config/json/france_cdn.json"
+    configDirPath = "/home/picarib_home/cdnet/config/france_cdn/"
+    dataPath = "/home/picarib_home/cdnet/data/"
+    deleteCachePath = "/home/picarib_home/cdn_configuration_optimization/tmp/france_cdn"  
     
     config = loadJSON(jsonFile)
     interval = 1 if "custom" not in config["RequestModels"] else config["RequestModels"]["custom"]["interval"]
@@ -132,7 +134,7 @@ def main():
     topo = NetTopology(config, configDirPath, mode, warmUpReqNums, fileSize, colorList)
     topo.build()
     
-    extra_params = (topo, fileSize, mode, colorList, runReqNums, warmUpReqNums, separatorRankIncrement)
+    extra_params = (topo, fileSize, mode, colorList, runReqNums, warmUpReqNums, separatorRankIncrement, deleteCachePath)
     problem, X_init, Y_init = build_problem(args.problem, args.n_var, args.n_obj, args.n_init_sample, args.n_process, extra_params=extra_params)
     args.n_var, args.n_obj, args.algo = problem.n_var, problem.n_obj, 'nsga2'
 

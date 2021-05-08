@@ -6,9 +6,9 @@ import numpy as np
 
 def get_args():
     parser = ArgumentParser()
-    parser.add_argument('--n-seed', type=int, default=7, help='number of different seeds')
+    parser.add_argument('--n-seed', type=int, default=4, help='number of different seeds')
     parser.add_argument('--subfolder', type=str, default='default', help='subfolder of result')
-    parser.add_argument('--savefig', default=False, action='store_true', help='saving instead of showing the plot')
+    parser.add_argument('--savefig', default=True, action='store_true', help='saving instead of showing the plot')
     parser.add_argument('--num-eval', type=int, default=300, help='number of evaluations')
     args = parser.parse_args()
     return args
@@ -18,7 +18,8 @@ def main():
     args = get_args()
 
     problems = ['cdn_ram']
-    algos = {'tsemo': 'TSEMO', 'usemo-ei': 'USeMO-EI', 'dgemo': 'DGEMO', 'nsga2': 'NSGA-2'}
+    algos = {'tsemo-basic': 'TSEMO-Basic', 'tsemo-transformation': 'TSEMO-Transformation',
+                 'usemo-ucb-basic': 'USeMO-EI-Basic', 'usemo-ucb-transformation': 'USeMO-EI-Transformation'}
 
     result_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'result')
 
@@ -28,7 +29,7 @@ def main():
     colors = ['orange', 'mediumaquamarine', 'mediumslateblue', 'red']
     
     for pid, problem in enumerate(problems):
-        problem_dir = "/home/picarib/Desktop/cdn_ram/default/"
+        problem_dir = "/home/picarib_home/cdn_ram/france_cdn/"
 
         # read result csvs
         data_list = [[] for _ in range(n_algo)]
@@ -49,6 +50,7 @@ def main():
         for i in range(n_algo):
             for j in range(n_seed):
                 hv_data = data_list[i][j]['Hypervolume_indicator']
+                print(algos[list(algos.keys())[i]])
                 hv[i][j] = np.concatenate([np.full(batch_size, hv_data[0]), hv_data[num_init_samples:num_samples - batch_size + 1]])
 
         row_id, col_id = pid // n_col, pid % n_col
