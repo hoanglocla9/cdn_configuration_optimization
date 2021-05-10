@@ -44,7 +44,6 @@ class NetTopology (object):
                     self.cacheMemoryDict[routerId] = ColorCache(None, routerInfo["capacityRatio"] , maxSize)
                 idx += 1
         self.warmUp()
-       
         
     def reconfigTopology(self, avaiableVector, parallel_idx=0):
         self.parallel_idx = parallel_idx
@@ -65,6 +64,8 @@ class NetTopology (object):
             else:
                 warmUpReqDict = {}
                 for client in self.clientIds:
+                    if client in self.tempClientIds:
+                        continue
                     if self.contentGenerator.dist != None:
                         warmUpReqDict[client] = self.contentGenerator.randomGen(self.warmUpReqNums)
                     else:
@@ -152,7 +153,6 @@ class NetTopology (object):
             self.graph.add_node(clientId, ip=clientInfo["IP"], gw=clientInfo['gateway'])
             if clientInfo['isTemp']:
                 self.tempClientIds.append(clientId)
-                
         
         for idx, linkInfo in enumerate(self.networkInfo['Links']):
             nodeIds = linkInfo['NodeIds']

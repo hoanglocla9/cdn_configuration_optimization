@@ -268,13 +268,12 @@ def runSimulationWithRealDataset(interval, fileSize, mode, routingTable, topo, c
     hit, hit1, miss = 0,0,0
     result = {}
     for i in range(interval):
-        print("Interval %s" % str(i))
         uniqueSortedContentList = topo.contentGenerator.uniqueSortedContentList["Interval%s" % str(i)]
         if mode == "no-color":
             hitRateDict, traffic = runWithShortestPath(graph, cacheDict, fileSize, mode, routingTable, custom_data, clientIds, "Interval"+str(i))
         elif mode == "full-color": # color
-            nearestColorServerInfo = colorRouteInfo
-            serverToColorMap = serverToColorMap
+            nearestColorServerInfo = topo.colorRouteInfo
+            serverToColorMap = topo.serverToColorMap
             
             
             rankInfo = compute_rank(len(colorList), cacheCapacity, fileSize, graph, nearestColorServerInfo, contentGenerator,
@@ -284,7 +283,7 @@ def runSimulationWithRealDataset(interval, fileSize, mode, routingTable, topo, c
             hitRateDict, traffic = runWithColorRouting(graph, cacheDict, contentToColorDict, nearestColorServerInfo, 
                                    serverToColorMap, fileSize, routingTable, custom_data, clientIds, "Interval"+str(i))
         elif mode == "tag-color": # color
-            nearestColorServerInfo = colorRouteInfo
+            nearestColorServerInfo = topo.colorRouteInfo
             rankInfo = compute_rank_shortest_path_with_color(len(colorList), cacheCapacity, fileSize, graph, nearestColorServerInfo, contentGenerator,
                                         cacheDict, warmUpReqNums, runReqNums, 
                                         clientIds, separatorRankIncrement, "Interval"+str(i))
@@ -292,7 +291,6 @@ def runSimulationWithRealDataset(interval, fileSize, mode, routingTable, topo, c
             hitRateDict, traffic = runWithShortestPath(graph, cacheDict, fileSize, mode, routingTable, custom_data, clientIds, "Interval"+str(i), contentToColorDict)
         else:
             hitRateDict, traffic = runWithShortestPath(graph, cacheDict, fileSize, mode, routingTable, custom_data, clientIds, "Interval"+str(i))
-
     return traffic
 
 def runSimulationWithPredefinedDistribution(fileSize, mode, routingTable, topo, colorList, runReqNums, warmUpReqNums, separatorRankIncrement, generateData, uniqueSortedContentList, parallel_idx=0):
@@ -336,9 +334,9 @@ def runSimulationWithPredefinedDistribution(fileSize, mode, routingTable, topo, 
 if __name__ == '__main__':
     global dataPath
     
-    jsonFile = "/home/loclh/cdn_configuration_optimization/config/json/sbd_custom-origin.json"
-    configDirPath = "/home/loclh/cdn_configuration_optimization/config/sbd_custom-origin/"
-    dataPath = "/home/loclh/cdn_configuration_optimization/data/"
+    jsonFile = "/home/picarib_home/cdn_configuration_optimization/config/json/sbd_custom-origin.json"
+    configDirPath = "/home/picarib_home/cdn_configuration_optimization/config/sbd_custom-origin/"
+    dataPath = "/home/picarib_home/cdn_configuration_optimization/data/"
     
     
     config = loadJSON(jsonFile)
