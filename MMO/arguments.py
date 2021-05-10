@@ -16,7 +16,7 @@ def get_general_args(args=None):
 
     parser.add_argument('--problem', type=str, default='cdn_ram', 
         help='optimization problem')
-    parser.add_argument('--n-var', type=int, default=13, 
+    parser.add_argument('--n-var', type=int, default=4, 
         help='number of design variables')
     parser.add_argument('--n-obj', type=int, default=2, 
         help='number of objectives')
@@ -26,7 +26,7 @@ def get_general_args(args=None):
         help='number of optimization iterations')
     parser.add_argument('--ref-point', type=float, nargs='+', default=None, 
         help='reference point for calculating hypervolume')
-    parser.add_argument('--batch-size', type=int, default=1, 
+    parser.add_argument('--batch-size', type=int, default=10, 
         help='size of the selected batch in one iteration')
 
     parser.add_argument('--seed', type=int, default=0, 
@@ -34,18 +34,18 @@ def get_general_args(args=None):
     parser.add_argument('--n-seed', type=int, default=1,
         help='number of random seeds / test runs')
 
-    parser.add_argument('--algo', type=str, default='usemo-ucb',
+    parser.add_argument('--algo', type=str, default='usemo-ei',
         help='type of algorithm to use with some predefined arguments, or custom arguments')
 
-    parser.add_argument('--subfolder', type=str, default='default',
+    parser.add_argument('--subfolder', type=str, default='sbd_custom-origin',
         help='subfolder name for storing results, directly store under result/ as default')
-    parser.add_argument('--exp-name', type=str, default='france_cdn',
+    parser.add_argument('--exp-name', type=str, default='basic',
         help='custom experiment name to distinguish between experiments on same problem and same algorithm')
     parser.add_argument('--log-to-file', default=False, action='store_true',
         help='log output to file rather than print by stdout')
     parser.add_argument('--n-process', type=int, default=cpu_count(),
         help='number of processes to be used for parallelization')
-    parser.add_argument('--interval', type=int, default=0,
+    parser.add_argument('--interval', type=int, default=1,
         help='number of processes to be used for parallelization')
     
     args, _ = parser.parse_known_args(args)
@@ -68,7 +68,7 @@ def get_surroagte_args(args=None):
         help='parameter nu for matern kernel (integer, -1 means inf)')
     parser.add_argument('--mean-sample', default=False, action='store_true', 
         help='use mean sample when sampling objective functions')
-    parser.add_argument('--mode',  default=2,  ## 0 => basic, 1 => kernel-based, 2 => testing
+    parser.add_argument('--mode',  default=0,  ## 0 => basic, 1 => kernel-based, 2 => testing
         help='Integer variable or not')
     args, _ = parser.parse_known_args(args)
     return args
@@ -107,7 +107,7 @@ def get_solver_args(args=None):
         help='method to init population')
     parser.add_argument('--n-process', type=int, default=cpu_count(),
         help='number of processes to be used for parallelization')
-    parser.add_argument('--batch-size', type=int, default=1, 
+    parser.add_argument('--batch-size', type=int, default=20, 
         help='size of the selected batch in one iteration')
 
     # ParetoDiscovery solver
@@ -142,7 +142,7 @@ def get_selection_args(args=None):
 
     parser.add_argument('--selection', type=str, default='hvi', 
         help='type of selection method for new batch')
-    parser.add_argument('--batch-size', type=int, default=1, 
+    parser.add_argument('--batch-size', type=int, default=10, 
         help='size of the selected batch in one iteration')
 
     args, _ = parser.parse_known_args(args)
