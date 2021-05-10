@@ -100,6 +100,8 @@ def runWithColorRouting(graph, cacheDict, contentToColorDict, nearestColorServer
         isEnd = True
         for client in clientList:
             cacheId = client.replace("client_", "Cache_")
+            if not cacheId in runReqDict:
+                continue
             if idx >= len(runReqDict[cacheId][interval]):
                 continue
             if fileSize != -1:
@@ -206,6 +208,8 @@ def runWithShortestPath(graph, cacheDict, fileSize, mode, routingTable, runReqDi
         isEnd = True
         for client in clientList:
             cacheId = client.replace("client_", "Cache_")
+            if not cacheId in runReqDict:
+                continue
             if idx >= len(runReqDict[cacheId][interval]):
                 continue
             if fileSize != -1:
@@ -332,9 +336,9 @@ def runSimulationWithPredefinedDistribution(fileSize, mode, routingTable, topo, 
 if __name__ == '__main__':
     global dataPath
     
-    jsonFile = "/home/picarib_home/cdn_configuration_optimization/config/json/france_cdn.json"
-    configDirPath = "/home/picarib_home/cdn_configuration_optimization/config/france_cdn/"
-    dataPath = "/home/picarib_home/cdn_configuration_optimization/data/"
+    jsonFile = "/home/loclh/cdn_configuration_optimization/config/json/sbd_custom-origin.json"
+    configDirPath = "/home/loclh/cdn_configuration_optimization/config/sbd_custom-origin/"
+    dataPath = "/home/loclh/cdn_configuration_optimization/data/"
     
     
     config = loadJSON(jsonFile)
@@ -352,23 +356,24 @@ if __name__ == '__main__':
     topo.build()
     routingTable = {}
     
-    savePredefinedContent = os.path.join("tmp/", "save_content.pkl")
-    if os.path.isfile(savePredefinedContent):
-        with open(savePredefinedContent, "rb") as f:
-            generateData, uniqueSortedContentList = pickle.load(f)
-    else:
-        uniqueSortedContentList = topo.contentGenerator.uniqueSortedContentList["noInterval"]
-        generateData = {}
-        for client in topo.clientIds:
-            cacheId = client.replace("client", "Cache")
-            generateData[cacheId] = {"noInterval": topo.contentGenerator.randomGen(runReqNums)}
-        with open(savePredefinedContent, "wb") as f:
-            pickle.dump([generateData, uniqueSortedContentList], f)
+   # savePredefinedContent = os.path.join("tmp/", "save_content.pkl")
+   # if os.path.isfile(savePredefinedContent):
+    #    with open(savePredefinedContent, "rb") as f:
+   #         generateData, uniqueSortedContentList = pickle.load(f)
+   # else:
+   #     uniqueSortedContentList = topo.contentGenerator.uniqueSortedContentList["noInterval"]
+   #     generateData = {}
+    #    for client in topo.clientIds:
+   #         cacheId = client.replace("client", "Cache")
+  #          generateData[cacheId] = {"noInterval": topo.contentGenerator.randomGen(runReqNums)}
+ #       with open(savePredefinedContent, "wb") as f:
+#            pickle.dump([generateData, uniqueSortedContentList], f)
         
     print("*** Start runing simulation ***")
     if topo.contentGenerator.dist == None:
         result = runSimulationWithRealDataset(interval, fileSize, mode, routingTable, topo, colorList, runReqNums, warmUpReqNums, separatorRankIncrement)
     else:
+        
         MAX_COUNT_INDEX = 0
         result = runSimulationWithPredefinedDistribution(fileSize, mode, routingTable, topo, colorList, runReqNums, warmUpReqNums, separatorRankIncrement, generateData, uniqueSortedContentList)
     print(result)
