@@ -28,20 +28,14 @@ class CDN_RAM(CDN):
         raise "Not implement yet"
 
     def _evaluate(self, x, out,  *args, **kwargs):
-#         if not self.transformToInteger:
-#             x_temp = x.copy()
-#         else:
-#             x_temp = np.round(x.copy())
         x_temp = np.round(x.copy())
         self.count_step += len(x_temp)
-
         if self.n_process > 1:
             performance = 1.0 * self.performance_function_parallel(x_temp)
         else:
             performance = 1.0 * self.performance_function(x_temp)
         cost = self.cost_function(x_temp)
         del x, x_temp
-        
         normalized_performance = (performance - np.ones(performance.shape) * self.performance_bounds[0]) / (self.performance_bounds[1] - self.performance_bounds[0])
         normalized_cost = (cost - self.cost_bounds[0]) / (self.cost_bounds[1] - self.cost_bounds[0])
 
@@ -82,27 +76,22 @@ class CDN_RAM(CDN):
         self.compute_y_bounds()
         
     def performance_function_parallel(self, cacheSizeFactorList):
-        randomIdxList = []
+        dataList = []
         for i in range(len(cacheSizeFactorList)):
             temp = [0] * (len(cacheSizeFactorList[i]))
             for j in range(len(cacheSizeFactorList[i])):
-                temp[j] = int(cacheSizeFactorList[i][j] * 1013185)
+                temp[j] = int(cacheSizeFactorList[i][j] * 982012)
             randomIdx = random.randint(10000, 99999)
-            with open(self.deleteCachePath + "/save_" + str(randomIdx), "wb") as f:
-                save_data = [self.fileSize, self.mode, self.topo, self.colorList, self.runReqNums, self.warmUpReqNums, self.separatorRankIncrement, temp]
-                pickle.dump(save_data, f)
-            del save_data
-            randomIdxList.append(randomIdx)
+            save_data = [randomIdx, self.fileSize, self.mode, self.topo, self.colorList, self.runReqNums, self.warmUpReqNums, self.separatorRankIncrement, temp]
+            dataList.append(save_data)
         pool = mp.Pool(processes=self.n_process)
-        results = pool.map(self.process_compute_perforamnce, randomIdxList)
-
+        results = pool.map(self.process_compute_perforamnce, dataList)
+        
         pool.terminate()
-        del pool
+        del pool, dataList
         return np.array(results)
-    def process_compute_perforamnce(self, idx):
-        with open(self.deleteCachePath + "/save_" + str(idx), "rb") as f:
-            data = pickle.load(f)
-        fileSize, mode, topo, colorList, runReqNums, warmUpReqNums, separatorRankIncrement, cacheSizeFactorList = data
+    def process_compute_perforamnce(self, data):
+        idx, fileSize, mode, topo, colorList, runReqNums, warmUpReqNums, separatorRankIncrement, cacheSizeFactorList = data
         topo.reconfigRam(cacheSizeFactorList, idx)
         routingTable = {}
         if not self.interval is None:
@@ -119,7 +108,7 @@ class CDN_RAM(CDN):
         for i in range(len(cacheSizeFactorList)):
             temp = [0] * (len(cacheSizeFactorList[i]))
             for j in range(len(cacheSizeFactorList[i])):
-                temp[j] = int(cacheSizeFactorList[i][j] * 1013185) # * (800*1024-100*1024) + 100 *1024
+                temp[j] = int(cacheSizeFactorList[i][j] * 982012) # * (800*1024-100*1024) + 100 *1024
             self.topo.reconfigRam(temp, 0)
             routingTable = {}
             if not self.interval is None:
