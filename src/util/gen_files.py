@@ -220,9 +220,9 @@ class ContentGenerator:
                                
 
                     if cache not in result:
-                        result[cache] = {interval: fileIdList}
+                        result[cache] = {interval: fileIdList[-20000:]}
                     else:
-                        result[cache][interval] = fileIdList
+                        result[cache][interval] = fileIdList[-20000:]
         
         self.custom_data = result
     
