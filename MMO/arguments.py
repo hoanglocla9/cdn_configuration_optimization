@@ -68,7 +68,7 @@ def get_surroagte_args(args=None):
         help='parameter nu for matern kernel (integer, -1 means inf)')
     parser.add_argument('--mean-sample', default=False, action='store_true', 
         help='use mean sample when sampling objective functions')
-    parser.add_argument('--mode',  default=0,  ## 0 => basic, 1 => kernel-based, 2 => testing
+    parser.add_argument('--mode',  default=0,  ## 0 => basic, 1 => kernel-based, 2 => adjust_factor
         help='Integer variable or not')
     args, _ = parser.parse_known_args(args)
     return args

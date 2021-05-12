@@ -2,8 +2,8 @@
 problem: cdn_ram
 n_var: 13
 n_obj: 2
-n_init_sample: 50
-n_iter: 40
+n_init_sample: 100
+n_iter: 30
 ref_point: !!python/object/apply:numpy.core.multiarray._reconstruct
   args:
   - !!python/name:numpy.ndarray ''
@@ -31,7 +31,7 @@ ref_point: !!python/object/apply:numpy.core.multiarray._reconstruct
     - 0
   - false
   - !!binary |
-    +c+DIIVp3D8m6zkm6znmPw==
+    Hvqqn4EU4T9Fp85Ep87kPw==
 batch_size: 10
 pop_init_method: nds
 seed: 0

@@ -32,7 +32,7 @@ class ThompsonSampling(GaussianProcess):
             sw1, sw2 = lhs(self.n_var, self.M), lhs(self.n_var, self.M)
             if not bounds is None:
                 sw1, sw2 = bounds[0] + sw1 * (bounds[1] - bounds[0]), bounds[0] + sw2 * (bounds[1] - bounds[0])
-                if mode == 1:
+                if mode == 1 or mode == 2:
                     sw1, sw2 = np.round(sw1), np.round(sw2)
                     
             if self.nu > 0:

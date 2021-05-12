@@ -137,7 +137,7 @@ class GaussianProcess(SurrogateModel):
 
         for _ in range(n_obj):
             if nu > 0:
-                if int(mode) == 1:
+                if int(mode) == 1 or mode == 2:
                     main_kernel = IntegerBasedKernel(length_scale=np.ones(n_var) * 1e2, length_scale_bounds=(np.sqrt(1e-15), np.sqrt(1e15)), nu=0.5 * nu) # 
                 elif mode == 0:
                     main_kernel = Matern(length_scale=np.ones(n_var) * 1e2, length_scale_bounds=(np.sqrt(1e-15), np.sqrt(1e15)), nu=0.5 * nu)
@@ -146,11 +146,11 @@ class GaussianProcess(SurrogateModel):
             else:
                 main_kernel = RBF(length_scale=np.ones(n_var), length_scale_bounds=(np.sqrt(1e-15), np.sqrt(1e15)))
                 
-            if mode == 2:
-                kernel =  ConstantKernel(constant_value=1.0, constant_value_bounds=(np.sqrt(1e-3), np.sqrt(1e3))) * main_kernel + \
-                                    ConstantKernel(constant_value=1e-2, constant_value_bounds=(np.exp(-6), np.exp(0)))
-            else:
-                kernel =  ConstantKernel(constant_value=1.0, constant_value_bounds=(np.sqrt(1e-15), np.sqrt(1e15))) * main_kernel + \
+            # if mode == 2:
+            #     kernel =  ConstantKernel(constant_value=1.0, constant_value_bounds=(np.sqrt(1e-3), np.sqrt(1e3))) * main_kernel + \
+            #                         ConstantKernel(constant_value=1e-2, constant_value_bounds=(np.exp(-6), np.exp(0)))
+            # else:
+            kernel =  ConstantKernel(constant_value=1.0, constant_value_bounds=(np.sqrt(1e-15), np.sqrt(1e15))) * main_kernel + \
                                     ConstantKernel(constant_value=1e-1, constant_value_bounds=(np.exp(-6), 10))
             
             gp = GaussianProcessRegressor(kernel=kernel, optimizer=constrained_optimization)
@@ -160,6 +160,11 @@ class GaussianProcess(SurrogateModel):
         for i, gp in enumerate(self.gps):
             gp.fit(X, Y[:, i])
             
+    def setLength(self, lengthScale):
+        self.gps[1].set_params(kernel__k1__k2__length_scale=lengthScale)
+    def getLength(self):
+        return self.gps[1].get_params()['kernel__k1__k2__length_scale']
+        
     def evaluate(self, X, std=False, calc_gradient=False, calc_hessian=False):
         F, dF, hF = [], [], [] # mean
         S, dS, hS = [], [], [] # std

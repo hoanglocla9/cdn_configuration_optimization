@@ -97,9 +97,11 @@ class Uncertainty(Selection):
         Y_std = val['S']
         if not transformation is None:
             X = transformation.undo(x=X)
-
+            
         uncertainty = np.prod(Y_std, axis=1)
+        
         top_indices = np.argsort(uncertainty)[::-1][:self.batch_size]
+        
         return X[top_indices], None
 
 

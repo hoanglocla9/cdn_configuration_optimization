@@ -8,9 +8,9 @@ general:
   batch_size: 10
   seed: 0
   n_seed: 1
-  algo: usemo-ei
+  algo: usemo-ucb
   subfolder: france_cdn
-  exp_name: transformation
+  exp_name: basic
   log_to_file: false
   n_process: 8
   interval: null
@@ -27,7 +27,7 @@ acquisition:
 solver:
   solver: nsga2
   pop_size: 50
-  n_gen: 10
+  n_gen: 20
   pop_init_method: nds
   n_process: 8
   batch_size: 20

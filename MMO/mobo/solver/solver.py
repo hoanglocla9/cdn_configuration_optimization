@@ -32,7 +32,7 @@ class Solver:
         # initialize population
         sampling = self._get_sampling(X, Y, bound, mode)
         # setup algorithm
-        if mode == 1:
+        if mode == 1 or mode == 2:
             algo = self.algo_type(sampling=sampling,
                       crossover=get_crossover("int_sbx", prob=1.0),
                       mutation=get_mutation("int_pm", prob=1/X.shape[1]), eliminate_duplicates=True)
@@ -44,6 +44,7 @@ class Solver:
         
         # construct solution
         self.solution = {'x': res.pop.get('X'), 'y': res.pop.get('F'), 'algo': res.algorithm}
+        
         # fill the solution in case less than batch size
         pop_size = len(self.solution['x'])
         if pop_size < self.batch_size:

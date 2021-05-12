@@ -113,16 +113,19 @@ class EI(Acquisition):
 
     def __init__(self, *args, **kwargs):
         self.y_min = None
-
+        self.exploitation_factor=0
     def fit(self, X, Y):
         self.y_min = np.min(Y, axis=0)
-
-    def evaluate(self, val, calc_gradient=False, calc_hessian=False, exploitation_factor=0):
+    def setFactor(self, factor):
+        self.exploitation_factor = factor
+    def getFactor(self):
+        return self.exploitation_factor
+    def evaluate(self, val, calc_gradient=False, calc_hessian=False):
         y_mean, y_std = val['F'], val['S']
         z = safe_divide(self.y_min - y_mean, y_std)
         pdf_z = norm.pdf(z)
         cdf_z = norm.cdf(z)
-        F = -(self.y_min - y_mean + exploitation_factor) * cdf_z - y_std * pdf_z ## exploitation_factor decrease, exploration is increase
+        F = -(self.y_min - y_mean + self.exploitation_factor) * cdf_z - y_std * pdf_z ## exploitation_factor decrease, exploration is increase
         
         dF, hF = None, None
         dy_mean, hy_mean, dy_std, hy_std = val['dF'], val['hF'], val['dS'], val['hS']
@@ -177,18 +180,24 @@ class UCB(Acquisition):
     def fit(self, X, Y):
         self.n_sample = X.shape[0]
         
+    def getFactor(self):
+        return self.lamda
+    
+    def setFactor(self, lamda):
+        self.lamda = lamda
+        
     def evaluate(self, val,  calc_gradient=False, calc_hessian=False):
-        lamda = np.sqrt(np.log(self.n_sample) / self.n_sample)
-           
+        self.lamda = np.sqrt(np.log(self.n_sample) / self.n_sample)
+            
         y_mean, y_std = val['F'], val['S']
-        F = y_mean - lamda * y_std
+        F = y_mean - self.lamda * y_std
 
         dF, hF = None, None
         dy_mean, hy_mean, dy_std, hy_std = val['dF'], val['hF'], val['dS'], val['hS']
         
         if calc_gradient or calc_hessian:
             dF_y_mean = np.ones_like(y_mean)
-            dF_y_std = -lamda * np.ones_like(y_std)
+            dF_y_std = -self.lamda * np.ones_like(y_std)
 
             dF_y_mean, dF_y_std = expand(dF_y_mean), expand(dF_y_std)
 

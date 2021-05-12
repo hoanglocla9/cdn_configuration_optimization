@@ -13,6 +13,7 @@ general:
   exp_name: transformation
   log_to_file: false
   n_process: 8
+  interval: null
 surrogate:
   surrogate: gp
   n_spectral_pts: 100
@@ -25,7 +26,7 @@ acquisition:
   acquisition: identity
 solver:
   solver: nsga2
-  pop_size: 100
+  pop_size: 50
   n_gen: 10
   pop_init_method: nds
   n_process: 8

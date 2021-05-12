@@ -9,7 +9,12 @@ import scipy, random
 Main algorithm framework for Multi-Objective Bayesian Optimization
 '''
 
-                
+def computeHV(X, Y, ref_point):
+    pfront, pfront_idx = find_pareto_front(Y, return_index=True)
+    pset =  X_new[pfront_idx]
+    hv = calc_hypervolume(pfront, ref_point)
+    return hv
+
 #@profile
 class MOBO:
     '''
@@ -31,11 +36,11 @@ class MOBO:
         self.ref_point = ref_point
         self.mode = int(framework_args['surrogate']['mode'])
         
-        if self.mode == 2:
-            bounds = np.array([problem.xl, problem.xu])
-            self.transformation = StandardTransform(bounds) # data normalization for surrogate model fitting
-        else:
-            self.transformation = None
+#         if self.mode == 2:
+#             bounds = np.array([problem.xl, problem.xu])
+#             self.transformation = StandardTransform(bounds) # data normalization for surrogate model fitting
+#         else:
+        self.transformation = None
             
         # framework components
         framework_args['surrogate']['n_var'] = self.n_var # for surrogate fitting
@@ -93,22 +98,18 @@ class MOBO:
         
         
         # solve surrogate problem
-        if self.mode == 1 or self.mode == 0:
-            bound = [self.real_problem.xl, self.real_problem.xu]
-        else:
-            bound = None
-                
+#         if self.mode == 1 or self.mode == 0:
+        bound = [self.real_problem.xl, self.real_problem.xu]
+#         else:
+#             bound = None
+        last_hv = 0
         for i in range(self.n_iter):
             print('========== Iteration %d ==========' % i)
 
             timer = Timer()
 
             # data normalization
-            if self.mode == 2:
-                self.transformation.fit(self.X, self.Y)
-                X, Y = self.transformation.do(self.X, self.Y)
-            else:
-                X, Y = self.X, self.Y
+            X, Y = self.X, self.Y
             # build surrogate models
             self.surrogate_model.fit(X, Y, bound, self.mode)
             
@@ -122,18 +123,42 @@ class MOBO:
             timer.log('Surrogate problem solved')
             # batch point selection
             self.selection.fit(X, Y)
-            X_next, self.info = self.selection.select(solution, self.surrogate_model, self.status, self.transformation)
+            X_next, self.info = self.selection.select(solution, surr_problem.surrogate_model, self.status, self.transformation)
             timer.log('Next sample batch selected')
 
-            if self.mode == 0 or self.mode == 2:
+            if self.mode != 0:
                 X_next = np.round(X_next)
-               
-            Y_next = self.real_problem.evaluate(X_next, return_values_of="F")
                 
-            self._update_status(X_next, Y_next)
             timer.log('New samples evaluated')
-            
-            # statistics
+            Y_next = self.real_problem.evaluate(X_next, return_values_of="F")
+            if mode == 2:
+                hv = computeHV(np.vstack([self.X, X_next]), np.vstack([self.Y, Y_next]), self.ref_point)
+                if hv == last_hv:
+                    timer.log('Adjust the factor')
+                    distance = scipy.spatial.distance.directed_hausdorff(points.reshape(-1, 2), last_pfront.reshape(-1,2))[0]
+                    if distance == 0:
+                        old_factor = surr_problem.acquisition.getFactor()
+                        def function(factor):
+                            surr_problem.acquisition.setFactor(factor)
+                            #surr_problem.surrogate_model.setLength(l)
+                            solution = self.solver.solve(surr_problem, X, Y, self.mode, bound)
+                            self.selection.fit(X, Y)
+                            x_new, _ = self.selection.select(solution, self.surrogate_model, self.status, self.transformation)
+                            y_new = self.real_problem.evaluate(x_new, return_values_of="F")
+                            new_hv = computeHV(np.vstack([self.X, x_new]), np.vstack([self.Y, y_new]), self.ref_point)
+                            new_distance = scipy.spatial.distance.directed_hausdorff(points.reshape(-1, 2), pfront)[0]
+                            delta_hv = hv - last_hv
+                            result = (factor - old_factor) + new_distance - 10 * delta_hv 
+                            print(str(factor) + " : " + str(result) + " : " + str(new_distance) + " : " + str(delta_hv))
+                            return result
+                        initFactor = [random.random()]
+                        x0 = np.array(initFactor) #  + initL
+                        bounds = [(old_factor, None)]
+                        res = scipy.optimize.minimize(function, x0, bounds=bounds, method='L-BFGS-B', options={'maxiter': 3})
+                        print(res)           
+            self._update_status(X_next, Y_next)
+            last_hv = self.status['hv']
+            last_pfront = self.status['pfront'].reshape(2, -1)
             global_timer.log('Total runtime', reset=False)
             print('Total evaluations: %d, hypervolume: %.4f\n' % (self.sample_num, self.status['hv']))
             
