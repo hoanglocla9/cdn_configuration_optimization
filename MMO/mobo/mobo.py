@@ -177,7 +177,7 @@ class MOBO:
                         initFactor = [old_factor]
                         x0 = np.array(initFactor) #  + initL
                         bounds = [(0, 1)]
-                        res = scipy.optimize.minimize(function, x0, bounds=bounds, method='L-BFGS-B', options={'maxfev': 10})
+                        res = scipy.optimize.minimize(function, x0, bounds=bounds, method='L-BFGS-B', options={'maxiter': 2, 'maxls': 5})
                         print("chose: " + str(res['x']))
                         x_new, y_new = re_compute_function (res['x'])
                         timer.log('Adjust the factor')
@@ -186,7 +186,8 @@ class MOBO:
                         else:
                             self._update_status(X_next, Y_next)
                         surr_problem.acquisition.setFactor(None)
-                        
+                    else:
+                        self._update_status(X_next, Y_next)
                 else:
                     self._update_status(X_next, Y_next)
             else:
