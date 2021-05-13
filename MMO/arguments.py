@@ -16,7 +16,7 @@ def get_general_args(args=None):
 
     parser.add_argument('--problem', type=str, default='cdn_ram', 
         help='optimization problem')
-    parser.add_argument('--n-var', type=int, default=4, 
+    parser.add_argument('--n-var', type=int, default=13, 
         help='number of design variables')
     parser.add_argument('--n-obj', type=int, default=2, 
         help='number of objectives')
@@ -34,7 +34,7 @@ def get_general_args(args=None):
     parser.add_argument('--n-seed', type=int, default=1,
         help='number of random seeds / test runs')
 
-    parser.add_argument('--algo', type=str, default='usemo-ei',
+    parser.add_argument('--algo', type=str, default='usemo-ucb',
         help='type of algorithm to use with some predefined arguments, or custom arguments')
 
     parser.add_argument('--subfolder', type=str, default='sbd_custom-origin',
@@ -45,7 +45,7 @@ def get_general_args(args=None):
         help='log output to file rather than print by stdout')
     parser.add_argument('--n-process', type=int, default=cpu_count(),
         help='number of processes to be used for parallelization')
-    parser.add_argument('--interval', type=int, default=1,
+    parser.add_argument('--interval', type=int, default=None,
         help='number of processes to be used for parallelization')
     
     args, _ = parser.parse_known_args(args)
@@ -100,7 +100,7 @@ def get_solver_args(args=None):
         help='type of the multiobjective solver')
     parser.add_argument('--pop-size', type=int, default=100, 
         help='population size')
-    parser.add_argument('--n-gen', type=int, default=100, 
+    parser.add_argument('--n-gen', type=int, default=10, 
         help='number of generations')
     parser.add_argument('--pop-init-method', type=str, 
         choices=['nds', 'random', 'lhs'], default='nds', 

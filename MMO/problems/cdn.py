@@ -8,7 +8,7 @@ from simulation import *
 import random, os, re
 
 class CDN(Problem):
-    def __init__ (self, n_var=4, n_obj=2, n_constr=0, xl=314, xu=5028, min_cost=0.5, transformToInteger=False):
+    def __init__ (self, n_var=4, n_obj=2, n_constr=0, xl=10, xu=180, min_cost=0.5, transformToInteger=False):
         super().__init__(n_var=n_var, n_obj=n_obj, n_constr=n_constr, xl=xl, xu=xu)
         self.min_cost = min_cost
         self.count_step = 0
@@ -80,7 +80,7 @@ class CDN_RAM(CDN):
         for i in range(len(cacheSizeFactorList)):
             temp = [0] * (len(cacheSizeFactorList[i]))
             for j in range(len(cacheSizeFactorList[i])):
-                temp[j] = int(cacheSizeFactorList[i][j] * 982012)
+                temp[j] = int(cacheSizeFactorList[i][j] * 1024)
             randomIdx = random.randint(10000, 99999)
             save_data = [randomIdx, self.fileSize, self.mode, self.topo, self.colorList, self.runReqNums, self.warmUpReqNums, self.separatorRankIncrement, temp]
             dataList.append(save_data)
@@ -108,7 +108,7 @@ class CDN_RAM(CDN):
         for i in range(len(cacheSizeFactorList)):
             temp = [0] * (len(cacheSizeFactorList[i]))
             for j in range(len(cacheSizeFactorList[i])):
-                temp[j] = int(cacheSizeFactorList[i][j] * 982012) # * (800*1024-100*1024) + 100 *1024
+                temp[j] = int(cacheSizeFactorList[i][j] * 1024) # * (800*1024-100*1024) + 100 *1024
             self.topo.reconfigRam(temp, 0)
             routingTable = {}
             if not self.interval is None:

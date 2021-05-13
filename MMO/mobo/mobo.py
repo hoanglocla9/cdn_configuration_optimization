@@ -11,9 +11,9 @@ Main algorithm framework for Multi-Objective Bayesian Optimization
 
 def computeHV(X, Y, ref_point):
     pfront, pfront_idx = find_pareto_front(Y, return_index=True)
-    pset =  X_new[pfront_idx]
+    pset =  X[pfront_idx]
     hv = calc_hypervolume(pfront, ref_point)
-    return hv
+    return hv, pfront
 
 #@profile
 class MOBO:
@@ -126,37 +126,72 @@ class MOBO:
             X_next, self.info = self.selection.select(solution, surr_problem.surrogate_model, self.status, self.transformation)
             timer.log('Next sample batch selected')
 
-            if self.mode != 0:
-                X_next = np.round(X_next)
+            X_next = np.round(X_next)
                 
             timer.log('New samples evaluated')
             Y_next = self.real_problem.evaluate(X_next, return_values_of="F")
-            if mode == 2:
-                hv = computeHV(np.vstack([self.X, X_next]), np.vstack([self.Y, Y_next]), self.ref_point)
+            if self.mode == 2:
+                hv, old_pfront = computeHV(np.vstack([self.X, X_next]), np.vstack([self.Y, Y_next]), self.ref_point)
+                print("current: " + str(hv) + " - last: " + str(last_hv))
                 if hv == last_hv:
-                    timer.log('Adjust the factor')
-                    distance = scipy.spatial.distance.directed_hausdorff(points.reshape(-1, 2), last_pfront.reshape(-1,2))[0]
-                    if distance == 0:
+                    distance = scipy.spatial.distance.directed_hausdorff(old_pfront, last_pfront.reshape(-1,2))[0]
+                    surr_problem.acquisition.setFactor(0.1)
+                    solution = self.solver.solve(surr_problem, X, Y, self.mode, bound)
+                    self.selection.fit(X, Y)
+                    x_new, _ = self.selection.select(solution, surr_problem.surrogate_model, self.status, self.transformation)
+                    y_new = self.real_problem.evaluate(x_new, return_values_of="F")
+                    new_hv, pfront = computeHV(np.vstack([self.X, x_new]), np.vstack([self.Y, y_new]), self.ref_point)
+                    print(distance)
+                    surr_problem.acquisition.setFactor(None)
+                    if distance < 0.02:
                         old_factor = surr_problem.acquisition.getFactor()
+                        x_new, y_new = [], []
+                        #############################
+                        #### Use optimizer to find value of factor
+                        #############################
                         def function(factor):
                             surr_problem.acquisition.setFactor(factor)
                             #surr_problem.surrogate_model.setLength(l)
                             solution = self.solver.solve(surr_problem, X, Y, self.mode, bound)
                             self.selection.fit(X, Y)
-                            x_new, _ = self.selection.select(solution, self.surrogate_model, self.status, self.transformation)
+                            
+                            x_new, _ = self.selection.select(solution, surr_problem.surrogate_model, self.status, self.transformation)
                             y_new = self.real_problem.evaluate(x_new, return_values_of="F")
-                            new_hv = computeHV(np.vstack([self.X, x_new]), np.vstack([self.Y, y_new]), self.ref_point)
-                            new_distance = scipy.spatial.distance.directed_hausdorff(points.reshape(-1, 2), pfront)[0]
-                            delta_hv = hv - last_hv
-                            result = (factor - old_factor) + new_distance - 10 * delta_hv 
+                            new_hv, pfront = computeHV(np.vstack([self.X, x_new]), np.vstack([self.Y, y_new]), self.ref_point)
+                            new_distance = scipy.spatial.distance.directed_hausdorff(old_pfront, pfront)[0]
+                            if new_distance < 0.02:
+                                new_distance = 1
+                            delta_hv = new_hv - last_hv
+                            result = new_distance - delta_hv + factor - old_factor # new_distance # (factor - old_factor) 
                             print(str(factor) + " : " + str(result) + " : " + str(new_distance) + " : " + str(delta_hv))
                             return result
-                        initFactor = [random.random()]
+                        def re_compute_function(factor):
+                            surr_problem.acquisition.setFactor(factor)
+                            #surr_problem.surrogate_model.setLength(l)
+                            solution = self.solver.solve(surr_problem, X, Y, self.mode, bound)
+                            self.selection.fit(X, Y)
+                            
+                            x_new, _ = self.selection.select(solution, self.surrogate_model, self.status, self.transformation)
+                            y_new = self.real_problem.evaluate(x_new, return_values_of="F")
+                            return x_new, y_new
+                        initFactor = [old_factor]
                         x0 = np.array(initFactor) #  + initL
-                        bounds = [(old_factor, None)]
-                        res = scipy.optimize.minimize(function, x0, bounds=bounds, method='L-BFGS-B', options={'maxiter': 3})
-                        print(res)           
-            self._update_status(X_next, Y_next)
+                        bounds = [(0, 1)]
+                        res = scipy.optimize.minimize(function, x0, bounds=bounds, method='L-BFGS-B', options={'maxfev': 10})
+                        print("chose: " + str(res['x']))
+                        x_new, y_new = re_compute_function (res['x'])
+                        timer.log('Adjust the factor')
+                        if len(x_new) > 0:
+                            self._update_status(x_new, y_new)
+                        else:
+                            self._update_status(X_next, Y_next)
+                        surr_problem.acquisition.setFactor(None)
+                        
+                else:
+                    self._update_status(X_next, Y_next)
+            else:
+                self._update_status(X_next, Y_next)
+                
             last_hv = self.status['hv']
             last_pfront = self.status['pfront'].reshape(2, -1)
             global_timer.log('Total runtime', reset=False)

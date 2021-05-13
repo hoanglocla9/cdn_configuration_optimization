@@ -177,20 +177,25 @@ class UCB(Acquisition):
     def __init__(self, lamda=None, *args, **kwargs):
         self.n_sample = None
         self.lamda = lamda
+        
     def fit(self, X, Y):
         self.n_sample = X.shape[0]
         
     def getFactor(self):
+        if self.lamda is None:
+            return np.log(self.n_sample) / self.n_sample
         return self.lamda
     
     def setFactor(self, lamda):
         self.lamda = lamda
         
     def evaluate(self, val,  calc_gradient=False, calc_hessian=False):
-        self.lamda = np.sqrt(np.log(self.n_sample) / self.n_sample)
+        lamda = np.sqrt(np.log(self.n_sample) / self.n_sample)
+        if not self.lamda is None:
+            lamda = np.sqrt(self.lamda)
             
         y_mean, y_std = val['F'], val['S']
-        F = y_mean - self.lamda * y_std
+        F = y_mean - lamda * y_std
 
         dF, hF = None, None
         dy_mean, hy_mean, dy_std, hy_std = val['dF'], val['hF'], val['dS'], val['hS']
