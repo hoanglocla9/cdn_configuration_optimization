@@ -1,9 +1,9 @@
 {
     "NetworkId": "sbd_custom-origin",
     "RequestModels": {
-        "custom": {"path": "/home/picarib/Desktop/mininet-simulation/dataset/FPT_Day_6_full_fileSize_timeStamp/", "interval": 24, "delta_T": 60, "alpha": 1.0}
+        "custom": {"path": "/home/loclh/cdn_configuration_optimization/dataset/FPT_Day_6_full_fileSize_timeStamp/", "interval": 24, "delta_T": 60, "alpha": 1.0}
     },
-    "RoutingMode": "full-color",
+    "RoutingMode": "no-color",
     "isLoadRTable": false,
     "isLoadSeparatorRank": false,
     "separatorRankIncrement": 1,
@@ -15,10 +15,10 @@
     "parallelDegree": 4,
     "Routers": [
         { "ID": "mainServer", "IP": "192.168.0.1/24", "dimage": "laloc2496/cdn_origin:latest"},
-        { "ID": "router_1", "IP": "192.168.1.1/26", "maxSize": 1273741824, "type": "Hybrid", "capacityRatio": 0.9},
-        { "ID": "router_2", "IP": "192.168.2.1/26", "maxSize": 1273741824, "type": "Hybrid", "capacityRatio": 0.9},
-        { "ID": "router_3", "IP": "192.168.3.1/26", "maxSize": 1273741824, "type": "Hybrid", "capacityRatio": 0.9},
-        { "ID": "router_4", "IP": "192.168.4.1/26", "maxSize": 3635973836, "type": "Hybrid", "capacityRatio": 0.9}
+        { "ID": "router_1", "IP": "192.168.1.1/26", "maxSize": 1273741824, "type": "LRU", "capacityRatio": 0.9},
+        { "ID": "router_2", "IP": "192.168.2.1/26", "maxSize": 1273741824, "type": "LRU", "capacityRatio": 0.9},
+        { "ID": "router_3", "IP": "192.168.3.1/26", "maxSize": 1273741824, "type": "LRU", "capacityRatio": 0.9},
+        { "ID": "router_4", "IP": "192.168.4.1/26", "maxSize": 3635973836, "type": "LRU", "capacityRatio": 0.9}
     ],
     "Clients": [
         { "ID": "client_1", "IP": "192.168.1.2/26", "gateway": "192.168.1.1", "isTemp": false},
