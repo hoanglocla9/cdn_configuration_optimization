@@ -1,7 +1,7 @@
 {
     "NetworkId": "sbd_custom",
     "RequestModels": {
-        "gamma": {"K": 0.475, "Theta": 170.6067, "contentNums": 500, "alpha": 1.0}
+        "gamma": {"K": 0.475, "Theta": 170.6067, "contentNums": 200, "alpha": 1.0}
     },
     "RoutingMode": "no-color",
     "isLoadRTable": false,
