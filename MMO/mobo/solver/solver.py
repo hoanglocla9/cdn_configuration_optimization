@@ -25,7 +25,8 @@ class Solver:
         self.algo_kwargs = kwargs
         self.solution = None
         self.seed = seed
-        
+        print("INIT SOLVER SEED: " + str(seed))
+
     def solve(self, problem, X, Y, mode, bound=None, n_gen=None):
         '''
         Solve the multi-objective problem
@@ -33,10 +34,10 @@ class Solver:
         # initialize population
         sampling = self._get_sampling(X, Y, bound, mode)
         # setup algorithm
-        if mode == 1 or mode == 2:
+        if mode == 1:
             algo = self.algo_type(sampling=sampling,
-                      crossover=get_crossover("int_sbx", prob=1.0),
-                      mutation=get_mutation("int_pm", prob=1/X.shape[1]), eliminate_duplicates=True)
+                      crossover=get_crossover("bin_ux"),
+                      mutation=get_mutation("bin_bitflip", prob=1/X.shape[1]), eliminate_duplicates=True)
         else:
             algo = self.algo_type(sampling=sampling, **self.algo_kwargs)
 

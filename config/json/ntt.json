@@ -1,7 +1,7 @@
 {
     "NetworkId": "ntt_topology",
     "RequestModels": {
-        "gamma": {"K": 0.475, "Theta": 170.6067, "contentNums": 100}
+        "gamma": {"K": 0.475, "Theta": 170.6067, "contentNums": 200}
     },
     "RoutingMode": "no-color",
     "isLoadRTable": true,
