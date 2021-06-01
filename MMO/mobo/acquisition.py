@@ -114,12 +114,19 @@ class EI(Acquisition):
     def __init__(self, *args, **kwargs):
         self.y_min = None
         self.exploitation_factor=0
+        
     def fit(self, X, Y):
         self.y_min = np.min(Y, axis=0)
+        
     def setFactor(self, factor):
-        self.exploitation_factor = factor
+        if factor is None:
+            self.exploitation_factor = 0
+        else:
+            self.exploitation_factor = factor
+        
     def getFactor(self):
         return self.exploitation_factor
+    
     def evaluate(self, val, calc_gradient=False, calc_hessian=False):
         y_mean, y_std = val['F'], val['S']
         z = safe_divide(self.y_min - y_mean, y_std)

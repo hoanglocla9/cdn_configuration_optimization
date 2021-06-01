@@ -125,8 +125,8 @@ class MOBO:
             self.selection.fit(X, Y)
             X_next, self.info = self.selection.select(solution, surr_problem.surrogate_model, self.status, self.transformation)
             timer.log('Next sample batch selected')
-
-            X_next = np.round(X_next)
+            if self.mode == 0:
+                X_next = np.round(X_next)
                 
             timer.log('New samples evaluated')
             Y_next = self.real_problem.evaluate(X_next, return_values_of="F")
@@ -159,10 +159,11 @@ class MOBO:
                             y_new = self.real_problem.evaluate(x_new, return_values_of="F")
                             new_hv, pfront = computeHV(np.vstack([self.X, x_new]), np.vstack([self.Y, y_new]), self.ref_point)
                             new_distance = scipy.spatial.distance.directed_hausdorff(old_pfront, pfront)[0]
-                            if new_distance < 0.02:
-                                new_distance = 1
+                            P = 0
+                            if new_distance < 0.0005:
+                                P = 1
                             delta_hv = new_hv - last_hv
-                            result = new_distance - delta_hv + factor - old_factor # new_distance # (factor - old_factor) 
+                            result = P - delta_hv + factor - old_factor # new_distance # (factor - old_factor)  # P
                             print(str(factor) + " : " + str(result) + " : " + str(new_distance) + " : " + str(delta_hv))
                             return result
                         def re_compute_function(factor):
@@ -174,11 +175,13 @@ class MOBO:
                             x_new, _ = self.selection.select(solution, self.surrogate_model, self.status, self.transformation)
                             y_new = self.real_problem.evaluate(x_new, return_values_of="F")
                             return x_new, y_new
-                        initFactor = [old_factor]
+                        initFactor = [random.random()] # [0]
                         x0 = np.array(initFactor) #  + initL
                         bounds = [(0, 1)]
-                        res = scipy.optimize.minimize(function, x0, bounds=bounds, method='L-BFGS-B', options={'maxiter': 2, 'maxls': 5})
+                        print(initFactor)
+                        res = scipy.optimize.minimize(function, x0, bounds=bounds, method='L-BFGS-B', options={'maxiter': 2})
                         print("chose: " + str(res['x']))
+                        print(res)
                         x_new, y_new = re_compute_function (res['x'])
                         timer.log('Adjust the factor')
                         if len(x_new) > 0:
